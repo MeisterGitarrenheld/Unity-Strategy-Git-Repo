@@ -1,20 +1,20 @@
 ### Aufgaben _(offen)_
-
-* NavMesh anschauen
-* generische Unit Typ (init und gameUpdate onDestroy (drops?))
-* generische Building Script(init, gameUpdate und onDestroy)
 * gameMaster-Script (Mit Referenz auf Terrein)
-* UserInteraction (mit ID?)
-  mit Input über Raycast?
 * UserInterface aktive Figur, Baumenü, Ressourcen,...
-* MultiplayerScript anschauen
-
 
 ### Aufgaben Tom
-
+* NavMesh anschauen
+* Terrein anlegen
+* MultiplayerScript anschauen
+* UserInteraction (mit ID?) mit Input über Raycast?
 
 ### Aufgaben Marco
-
+* NavMesh anschauen
+* MultiplayerScript anschauen
+* generische Building Script(init, gameUpdate und onDestroy)
+* generische Unit Typ (init und gameUpdate onDestroy (drops?))
+  * Attribute
+  * Wie angreifen? (mit Radius, Raycast für Sicht abfrage)
 
 ### Zu Testen
 
@@ -28,7 +28,3 @@ Vorlage Aufgabe:
 
   Aufgabenbeschreibung, bla bla
   _DeadLine:_ **XX.XX.XXXX**
-
-
-* plba
-  * sad
