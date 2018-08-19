@@ -9,9 +9,9 @@ public class UserInteraction : MonoBehaviour {
     private Transform camTransform;
     private Vector2 UpperBox;
     private Vector2 LowerBox;
+    private User user;
 
-    public List<Interactable> activeInteractable { get; private set; }
-    public GameObject activeObject { get; private set; }
+    public List<Transform> activeInteractable { get; private set; }
 
     
 	void Start ()
@@ -19,7 +19,8 @@ public class UserInteraction : MonoBehaviour {
         gm = GameMaster.Instance;
         cam = gm.MainCamera;
         camTransform = cam.transform;
-        activeInteractable = new List<Interactable>();
+        activeInteractable = new List<Transform>();
+        user = GetComponent<User>();
 	}
 	
 	void Update ()
@@ -52,34 +53,55 @@ public class UserInteraction : MonoBehaviour {
     void MiddleSelect()
     {
         LowerBox = cam.ScreenToViewportPoint(Input.mousePosition);
+        //print(cam.ViewportToScreenPoint(UpperBox) + ", " + cam.ViewportToScreenPoint(LowerBox));
+        //Debug.DrawLine(cam.ViewportToScreenPoint(UpperBox), cam.ViewportToWorldPoint(LowerBox),Color.blue);
     }
 
     void Select()
     {
-        
+        if(UpperBox.x < LowerBox.x)
+        {
+            float tmp = UpperBox.x;
+            UpperBox.x = LowerBox.x;
+            LowerBox.x = tmp;
+        }
+        if (UpperBox.y < LowerBox.y)
+        {
+            float tmp = UpperBox.y;
+            UpperBox.y = LowerBox.y;
+            LowerBox.y = tmp;
+        }
+        activeInteractable.Clear();
+        foreach (Transform t in gm.PlayerInteractable[user.PlayerNum])
+        {
+            Vector2 screenObject = cam.WorldToViewportPoint(t.position);
+            if(screenObject.x < UpperBox.x && screenObject.x > LowerBox.x
+                && screenObject.y < UpperBox.y && screenObject.y > LowerBox.y)
+            {
+                activeInteractable.Add(t);
+                t.GetComponent<Interactable>().Activate(this);
+            }
+        }
 
+        /* // Per Raycast Auswählen, nur eine Figur
         RaycastHit hit;
         if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out hit, 1000, 1 << LayerMask.NameToLayer("UserInteraction")))
         {
             print(hit.collider.name);
-            hit.collider.GetComponent<Interactable>().Activate(this);
         }
+        */
     }
 
     void MoveSelect()
     {
         RaycastHit hit;
-        if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out hit, 1000, 1 << LayerMask.NameToLayer("Ground")) && activeObject != null)
+        if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out hit, 1000, 1 << LayerMask.NameToLayer("Ground")))
         {
-            print(hit.collider.name);
-            print(activeObject.name);
-            activeObject.transform.parent.transform.position = hit.point + Vector3.up * 10;
+            foreach (Transform t in activeInteractable)
+            {
+                t.GetComponent<Interactable>().setTarget(new WalkType(hit.point));
+            }
         }
-    }
-
-    public void UpdateActiveObject(GameObject newActiveObjetc)
-    {
-        activeObject = newActiveObjetc;
     }
 
 

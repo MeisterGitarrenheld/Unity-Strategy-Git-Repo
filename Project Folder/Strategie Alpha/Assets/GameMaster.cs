@@ -13,14 +13,42 @@ public class GameMaster : MonoBehaviour {
     public Terrain Terrain;
     [HideInInspector]
     public Camera MainCamera;
-
-    public Dictionary<int, List<Interactable>> PlayerInteractable;
+    [HideInInspector]
+    public byte RegisteredPlayers;
+    
+    public List<User> Players { get; private set; }
+    public Dictionary<byte, List<Transform>> PlayerInteractable { get; private set; }
 
 	void Start ()
     {
         Instance = this;
-
         MainCamera = Camera.main;
+        PlayerInteractable = new Dictionary<byte, List<Transform>>();
+        Players = new List<User>();
 	}
 	
+    public void RegisterInteractable(Transform newObject, byte player)
+    {
+        List<Transform> worker;
+        PlayerInteractable.TryGetValue(player, out worker);
+        worker.Add(newObject);
+        PlayerInteractable[player] = worker;
+    }
+
+    public void UnRegisterInteractable(Transform remObject, byte player)
+    {
+        List<Transform> worker;
+        PlayerInteractable.TryGetValue(player, out worker);
+        worker.Remove(remObject);
+        PlayerInteractable[player] = worker;
+    }
+
+    public byte RegisterPlayer(User newUser)
+    {
+        byte newNum = RegisteredPlayers;
+        RegisteredPlayers++;
+        PlayerInteractable.Add(newNum, new List<Transform>());
+        Players.Add(newUser);
+        return newNum;
+    }
 }
