@@ -25,7 +25,7 @@ public class GameMaster : MonoBehaviour {
         MainCamera = Camera.main;
         PlayerInteractable = new Dictionary<byte, List<Transform>>();
         Players = new List<User>();
-	}
+    }
 	
     public void RegisterInteractable(Transform newObject, byte player)
     {

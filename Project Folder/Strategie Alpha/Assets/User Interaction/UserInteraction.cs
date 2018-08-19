@@ -72,15 +72,34 @@ public class UserInteraction : MonoBehaviour {
             LowerBox.y = tmp;
         }
         activeInteractable.Clear();
+        bool buildingSelect = false;
         foreach (Transform t in gm.PlayerInteractable[user.PlayerNum])
         {
             Vector2 screenObject = cam.WorldToViewportPoint(t.position);
             if(screenObject.x < UpperBox.x && screenObject.x > LowerBox.x
                 && screenObject.y < UpperBox.y && screenObject.y > LowerBox.y)
             {
-                activeInteractable.Add(t);
-                t.GetComponent<Interactable>().Activate(this);
+                Unit unit;
+                if ((unit = t.GetComponent<Unit>()) != null )//&& unit.getOwner() == user.PlayerNum)
+                {
+                    if(buildingSelect)
+                        activeInteractable.Clear();
+                    activeInteractable.Add(t);
+                    buildingSelect = false;
+                }
+                if(t.GetComponent<Building>() != null && activeInteractable.Count == 0)
+                {
+                    activeInteractable.Clear();
+                    activeInteractable.Add(t);
+                    buildingSelect = true;
+                }
             }
+        }
+
+        foreach (Transform t in activeInteractable)
+        {
+            t.GetComponent<Interactable>().Activate(this);
+            print(t.name);
         }
 
         /* // Per Raycast Auswählen, nur eine Figur
@@ -100,6 +119,7 @@ public class UserInteraction : MonoBehaviour {
             foreach (Transform t in activeInteractable)
             {
                 t.GetComponent<Interactable>().setTarget(new WalkType(hit.point));
+                print(t.name);
             }
         }
     }

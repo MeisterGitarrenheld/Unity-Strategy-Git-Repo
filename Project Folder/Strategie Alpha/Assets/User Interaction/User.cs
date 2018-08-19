@@ -12,7 +12,17 @@ public class User : MonoBehaviour {
     {
         gm = GameMaster.Instance;
         PlayerNum = gm.RegisterPlayer(this);
-	}
+
+        foreach (Unit un in FindObjectsOfType<Unit>())
+        {
+            gm.RegisterInteractable(un.transform, 0);
+        }
+
+        foreach (Building un in FindObjectsOfType<Building>())
+        {
+            gm.RegisterInteractable(un.transform, 0);
+        }
+    }
 	
 
 	void Update ()
