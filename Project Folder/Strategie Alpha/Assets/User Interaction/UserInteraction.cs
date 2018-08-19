@@ -8,6 +8,11 @@ public class UserInteraction : MonoBehaviour {
     private Camera cam;
     private Transform camTransform;
 
+    //public Unit activeUnit { get; private set; }
+    //public Building activeBuilding { get; private set; }
+    public GameObject activeObject { get; private set; }
+
+
 	// Use this for initialization
 	void Start () {
         gm = GameMaster.Instance;
