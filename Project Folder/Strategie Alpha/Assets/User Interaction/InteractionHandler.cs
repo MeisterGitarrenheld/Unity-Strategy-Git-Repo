@@ -4,5 +4,5 @@ using UnityEngine;
 
 public abstract class InteractionHandler : MonoBehaviour {
 
-    public abstract void Activate();
+    public abstract void Activate(UserInteraction interactor);
 }

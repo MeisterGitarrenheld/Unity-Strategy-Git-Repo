@@ -6,13 +6,16 @@ public class BoxInteractionHandler : InteractionHandler {
 
     private Rigidbody rb;
 
-    public override void Activate()
+    public override void Activate(UserInteraction interactor)
     {
         rb.useGravity = true;
         rb.AddTorque(new Vector3(
             Random.Range(-40.0f, 40.0f), 
             Random.Range(-40.0f, 40.0f), 
             Random.Range(-40.0f, 40.0f)));
+
+
+
     }
 
     // Use this for initialization

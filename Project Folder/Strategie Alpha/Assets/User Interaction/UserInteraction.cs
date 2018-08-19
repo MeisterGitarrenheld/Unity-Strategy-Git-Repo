@@ -26,16 +26,26 @@ public class UserInteraction : MonoBehaviour {
         {
             MouseClicked();
         }
+
 	}
 
     void MouseClicked()
     {
         RaycastHit hit;
-        if(Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out hit, 1000, 1 << LayerMask.NameToLayer("UserInteraction")))
+        if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out hit, 1000, 1 << LayerMask.NameToLayer("UserInteraction")))
         {
             print(hit.collider.name);
-            hit.collider.GetComponent<InteractionHandler>().Activate();
+            hit.collider.GetComponent<InteractionHandler>().Activate(this);
         }
+        else if (activeObject != null)
+        {
+            activeObject.transform.position = hit.point + Vector3.up * 10;
+        }
+    }
+
+    public void UpdateActiveObject(GameObject newActiveObjetc)
+    {
+        activeObject = newActiveObjetc;
     }
 
 }
