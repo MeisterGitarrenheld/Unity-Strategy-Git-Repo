@@ -5,12 +5,11 @@ using UnityEngine.AI;
 
 public abstract class Unit : MonoBehaviour,Interactable {
 	public enum UnitType {
-		BOW_UNIT,
 		AXE_UNIT,
+		BOW_UNIT,
 		COLLECTOR_UNIT
 	}
 	private byte owner;
-	public float MovementSpeed;
 	public float AttackSpeed;
 	public NavMeshAgent agent;
 	public int Health;
@@ -19,6 +18,9 @@ public abstract class Unit : MonoBehaviour,Interactable {
 
 	public void setOwner(byte owner){
 		this.owner = owner;
+	}
+	public byte getOwner(){
+		return owner;
 	}
 
 	public void setTarget(WalkType newTarget){
@@ -36,9 +38,13 @@ public abstract class Unit : MonoBehaviour,Interactable {
 			Die ();
 		}
 		if (target != null) {
-
+			agent.SetDestination (target.getTargetPosition ());
 		}
 		updateUnit ();
+	}
+
+	public UnitType getType(){
+		return Type;
 	}
 
 	void Die() {

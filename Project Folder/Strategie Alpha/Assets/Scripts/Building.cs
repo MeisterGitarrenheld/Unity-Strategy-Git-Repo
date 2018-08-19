@@ -2,15 +2,41 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Building : MonoBehaviour {
+public abstract class Building : MonoBehaviour,Interactable {
 
-	// Use this for initialization
-	void Start () {
-		
+	public int Health;
+	private byte owner;
+
+
+	public byte getOwner(){
+		return owner;
+	}
+
+	public void setOwner(byte owner){
+		this.owner = owner;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		updateBuilding ();
+
+		if (Health <= 0) {
+			Die ();
+		}
 	}
+
+	void Die() {
+		Destroy (this.gameObject);
+	}
+
+	public abstract void updateBuilding();
+
+	#region Interactable implementation
+
+	public void Activate (UserInteraction interactor)
+	{
+		//TODO  
+	}
+
+	#endregion
 }
