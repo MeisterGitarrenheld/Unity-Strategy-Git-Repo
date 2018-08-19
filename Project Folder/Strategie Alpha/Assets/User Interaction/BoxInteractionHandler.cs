@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoxInteractionHandler : InteractionHandler {
+public class BoxInteractionHandler : MonoBehaviour, Interactable {
 
     private Rigidbody rb;
 
-    public override void Activate(UserInteraction interactor)
+    public void Activate(UserInteraction interactor)
     {
         rb.useGravity = true;
         rb.AddTorque(new Vector3(
@@ -14,7 +14,7 @@ public class BoxInteractionHandler : InteractionHandler {
             Random.Range(-40.0f, 40.0f), 
             Random.Range(-40.0f, 40.0f)));
 
-
+        interactor.UpdateActiveObject(gameObject);
 
     }
 

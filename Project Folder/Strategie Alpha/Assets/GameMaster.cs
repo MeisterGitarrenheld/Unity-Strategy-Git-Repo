@@ -14,6 +14,7 @@ public class GameMaster : MonoBehaviour {
     [HideInInspector]
     public Camera MainCamera;
 
+    public Dictionary<int, List<Interactable>> PlayerInteractable;
 
 	void Start ()
     {
