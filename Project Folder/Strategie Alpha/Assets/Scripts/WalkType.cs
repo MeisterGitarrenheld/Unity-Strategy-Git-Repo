@@ -20,10 +20,6 @@ namespace AssemblyCSharp
 			attackTarget = target;
 		}
 
-		public bool justMoveUnit(){
-			return justMove;
-		}
-
 		public Vector3 getTargetPosition(){
 			if (justMove) {
 				return moveTarget;

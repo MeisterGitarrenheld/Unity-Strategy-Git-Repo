@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using AssemblyCSharp;
 
 public abstract class Unit : MonoBehaviour,Interactable {
 	public enum UnitType {
@@ -15,13 +16,13 @@ public abstract class Unit : MonoBehaviour,Interactable {
 	public NavMeshAgent agent;
 	public int Health;
 	public UnitType Type;
-	protected Vector3 target;
+	protected WalkType target;
 
 	public void setOwner(byte owner){
 		this.owner = owner;
 	}
 
-	public void setTarget(Vector3 newTarget){
+	public void setTarget(WalkType newTarget){
 		this.target = newTarget;
 	}
 
@@ -33,8 +34,10 @@ public abstract class Unit : MonoBehaviour,Interactable {
 	// Update is called once per frame
 	void Update () {
 		if (Health <= 0) {
-			target = null;
 			Die ();
+		}
+		if (target != null) {
+
 		}
 		updateUnit ();
 	}
@@ -43,6 +46,17 @@ public abstract class Unit : MonoBehaviour,Interactable {
 		Destroy (this.gameObject);
 	}
 
-	abstract void attack();
+	public abstract void attack();
+
+
+	#region Interactable implementation
+
+	public void Activate (UserInteraction interactor)
+	{
+		//TODO
+	}
+
+	#endregion
+
 	public abstract void updateUnit();
 }
