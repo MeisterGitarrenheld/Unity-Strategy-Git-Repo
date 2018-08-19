@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class CollectorUnit : Unit {
 
-	// Use this for initialization
-	void Start () {
-		
+	void buildBuilding(Building building){
+
 	}
-	
+
 	// Update is called once per frame
-	void Update () {
-		
+	override
+	public void updateUnit() {
+
+
+	}
+	override
+	public void attack(){
+
 	}
 }
