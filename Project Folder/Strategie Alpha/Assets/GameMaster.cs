@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class GameMaster : MonoBehaviour {
 
+    /// <summary>
+    /// Gamemaster hat alle Referenzen die im Spiel gebraucht werden
+    /// </summary>
     public static GameMaster Instance;
 
     [HideInInspector]
@@ -14,7 +17,9 @@ public class GameMaster : MonoBehaviour {
 
 	void Start ()
     {
+        Instance = this;
 
+        MainCamera = Camera.main;
 	}
 	
 }
