@@ -9,7 +9,7 @@ public abstract class Unit : MonoBehaviour,Interactable {
 		BOW_UNIT,
 		COLLECTOR_UNIT
 	}
-	private byte owner;
+	protected byte owner;
 	public float AttackSpeed;
 	public NavMeshAgent agent;
 	public int Health;

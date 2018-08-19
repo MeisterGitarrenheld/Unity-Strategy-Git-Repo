@@ -6,7 +6,7 @@ public abstract class Building : MonoBehaviour,Interactable {
 
 	public int Health;
 	private WalkType target;
-	private byte owner;
+	protected byte owner;
 
 
 	public byte getOwner(){

@@ -29,7 +29,8 @@ public class FactoryBuilding : Building {
 		currentBuildingTime -= factorySpeed;
 		if (currentBuildingTime <= 0) {			
 			if (currentJob != 0) {
-				Instantiate (listOfUnits [(int)currentJob], this.transform.position, this.transform.rotation);
+				GameObject obj = Instantiate (listOfUnits [(int)currentJob], this.transform.position, this.transform.rotation);
+				GameMaster.Instance.RegisterInteractable(obj.transform, owner);
 				currentJob = 0;
 			}
 			if (buildOrder.Count != 0) {
