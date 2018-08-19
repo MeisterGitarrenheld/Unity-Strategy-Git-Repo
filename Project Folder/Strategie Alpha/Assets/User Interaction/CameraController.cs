@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour {
         float moveY = Input.GetAxis("Vertical");
 
         transform.position += transform.right * moveX;
-        transform.position += new Vector3(transform.up.x * moveY, 0, transform.up.z * moveY);
+        transform.position += new Vector3(transform.up.x, 0, transform.up.z).normalized * moveY;
 
 	}
 }
