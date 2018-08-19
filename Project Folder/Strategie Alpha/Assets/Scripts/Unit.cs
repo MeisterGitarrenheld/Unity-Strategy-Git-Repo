@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using AssemblyCSharp;
 
 public abstract class Unit : MonoBehaviour,Interactable {
 	public enum UnitType {

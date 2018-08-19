@@ -1,8 +1,6 @@
 ﻿using System;
 using UnityEngine;
 
-namespace AssemblyCSharp
-{
 	public class WalkType
 	{
 		private bool justMove;
@@ -27,5 +25,4 @@ namespace AssemblyCSharp
 			return attackTarget.position;
 		}
 	}
-}
 
