@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class Building : MonoBehaviour,Interactable {
 
 	public int Health;
+	private WalkType target;
 	private byte owner;
 
 
@@ -39,4 +40,9 @@ public abstract class Building : MonoBehaviour,Interactable {
 	}
 
 	#endregion
+
+	public void setTarget (WalkType newTarget)
+	{
+		target = newTarget;
+	}
 }
