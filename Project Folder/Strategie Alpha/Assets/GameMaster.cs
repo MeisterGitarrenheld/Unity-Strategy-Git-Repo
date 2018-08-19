@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class GameMaster : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
+    public static GameMaster Instance;
+
+    [HideInInspector]
+    public Terrain Terrain;
+    [HideInInspector]
+    public Camera MainCamera;
+
+
+	void Start ()
+    {
+
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }
