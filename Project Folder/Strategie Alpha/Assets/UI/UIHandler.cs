@@ -16,7 +16,7 @@ public class UIHandler : MonoBehaviour {
 
 	void Start () {
         gm = GameMaster.Instance;
-        gm.Players[0].ui = this;
+        gm.RegisterUI(this);
         rectTrans = GetComponent<RectTransform>();
         Width = rectTrans.rect.width;
         Height = rectTrans.rect.height;

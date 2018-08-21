@@ -96,8 +96,8 @@ public class UserInteraction : MonoBehaviour {
         foreach (Transform t in gm.PlayerInteractable[user.PlayerNum])
         {
             Vector2 screenObject = cam.WorldToViewportPoint(t.position);
-            if(screenObject.x < UpperBox.x && screenObject.x > LowerBox.x
-                && screenObject.y < UpperBox.y && screenObject.y > LowerBox.y)
+            if(screenObject.x < UpperBox.x + 0.01 && screenObject.x > LowerBox.x - 0.01
+                && screenObject.y < UpperBox.y + 0.01 && screenObject.y > LowerBox.y - 0.01)
             {
                 Unit unit;
                 if ((unit = t.GetComponent<Unit>()) != null && unit.getOwner() == user.PlayerNum)

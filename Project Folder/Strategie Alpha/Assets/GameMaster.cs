@@ -51,4 +51,20 @@ public class GameMaster : MonoBehaviour {
         Players.Add(newUser);
         return newNum;
     }
+
+    public void RegisterUI(UIHandler ui)
+    {
+        //Add Ui to first User without Ui
+        foreach(User user in Players)
+        {
+            if(user.ui == null)
+            {
+                user.ui = ui;
+                return;
+            }
+        }
+        //If no free user, then destroy
+        Destroy(ui.gameObject);
+    }
+
 }
