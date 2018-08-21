@@ -5,6 +5,8 @@ using UnityEngine;
 public class User : MonoBehaviour {
 
     public byte PlayerNum { get; private set; }
+    [HideInInspector]
+    public UIHandler ui;
 
     private GameMaster gm;
 
@@ -15,12 +17,12 @@ public class User : MonoBehaviour {
 
         foreach (Unit un in FindObjectsOfType<Unit>())
         {
-            gm.RegisterInteractable(un.transform, 0);
+            gm.RegisterInteractable(un.transform, PlayerNum);
         }
 
         foreach (Building un in FindObjectsOfType<Building>())
         {
-            gm.RegisterInteractable(un.transform, 0);
+            gm.RegisterInteractable(un.transform, PlayerNum);
         }
     }
 	

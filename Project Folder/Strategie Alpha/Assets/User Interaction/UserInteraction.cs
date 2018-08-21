@@ -7,6 +7,7 @@ public class UserInteraction : MonoBehaviour {
     private GameMaster gm;
     private Camera cam;
     private Transform camTransform;
+    private Vector2 StartSelectPosition;
     private Vector2 UpperBox;
     private Vector2 LowerBox;
     private User user;
@@ -48,29 +49,48 @@ public class UserInteraction : MonoBehaviour {
 
     void StartSelect()
     {
-        UpperBox = cam.ScreenToViewportPoint(Input.mousePosition);
+        StartSelectPosition = cam.ScreenToViewportPoint(Input.mousePosition);
     }
     void MiddleSelect()
     {
-        LowerBox = cam.ScreenToViewportPoint(Input.mousePosition);
+        Vector2 mousePosition = cam.ScreenToViewportPoint(Input.mousePosition);
+        if (StartSelectPosition.x < mousePosition.x)
+        {
+            UpperBox.x = mousePosition.x;
+            LowerBox.x = StartSelectPosition.x;
+        }
+        else
+        {
+            UpperBox.x = StartSelectPosition.x;
+            LowerBox.x = mousePosition.x;
+        }
+        if (StartSelectPosition.y < mousePosition.y)
+        {
+            UpperBox.y = mousePosition.y;
+            LowerBox.y = StartSelectPosition.y;
+        }
+        else
+        {
+            UpperBox.y = StartSelectPosition.y;
+            LowerBox.y = mousePosition.y;
+        }
+        if (user.ui != null)
+        {
+            float scaleX = UpperBox.x - LowerBox.x;
+            float scaleY = UpperBox.y - LowerBox.y;
+            user.ui.mouseIndicator.rectTransform.sizeDelta = new Vector2(
+                scaleX * user.ui.Width,
+                scaleY * user.ui.Height);
+            user.ui.mouseIndicator.rectTransform.localPosition = new Vector2(
+                -user.ui.Width / 2 + UpperBox.x * user.ui.Width - scaleX * user.ui.Width / 2,
+                -user.ui.Height / 2 + UpperBox.y * user.ui.Height - scaleY * user.ui.Height / 2);
+        }
         //print(cam.ViewportToScreenPoint(UpperBox) + ", " + cam.ViewportToScreenPoint(LowerBox));
         //Debug.DrawLine(cam.ViewportToScreenPoint(UpperBox), cam.ViewportToWorldPoint(LowerBox),Color.blue);
     }
 
     void Select()
     {
-        if(UpperBox.x < LowerBox.x)
-        {
-            float tmp = UpperBox.x;
-            UpperBox.x = LowerBox.x;
-            LowerBox.x = tmp;
-        }
-        if (UpperBox.y < LowerBox.y)
-        {
-            float tmp = UpperBox.y;
-            UpperBox.y = LowerBox.y;
-            LowerBox.y = tmp;
-        }
         activeInteractable.Clear();
         bool buildingSelect = false;
         foreach (Transform t in gm.PlayerInteractable[user.PlayerNum])
@@ -80,7 +100,7 @@ public class UserInteraction : MonoBehaviour {
                 && screenObject.y < UpperBox.y && screenObject.y > LowerBox.y)
             {
                 Unit unit;
-                if ((unit = t.GetComponent<Unit>()) != null )//&& unit.getOwner() == user.PlayerNum)
+                if ((unit = t.GetComponent<Unit>()) != null && unit.getOwner() == user.PlayerNum)
                 {
                     if(buildingSelect)
                         activeInteractable.Clear();
@@ -96,10 +116,18 @@ public class UserInteraction : MonoBehaviour {
             }
         }
 
+        string selected = "";
         foreach (Transform t in activeInteractable)
         {
             t.GetComponent<Interactable>().Activate(this);
             print(t.name);
+            selected += t.name + "\n";
+        }
+
+        if (user.ui != null)
+        {
+            user.ui.selectedUnitText.text = selected;
+            user.ui.mouseIndicator.rectTransform.localPosition = new Vector2(-user.ui.Width * 2, 0);
         }
 
         /* // Per Raycast Auswählen, nur eine Figur
@@ -119,7 +147,6 @@ public class UserInteraction : MonoBehaviour {
             foreach (Transform t in activeInteractable)
             {
                 t.GetComponent<Interactable>().setTarget(new WalkType(hit.point));
-                print(t.name);
             }
         }
     }
