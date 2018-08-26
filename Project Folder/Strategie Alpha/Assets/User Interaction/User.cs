@@ -9,11 +9,14 @@ public class User : MonoBehaviour {
     public UIHandler ui;
 
     private GameMaster gm;
+    public UserInteraction uInteraction { get; private set; }
 
 	void Start ()
     {
         gm = GameMaster.Instance;
         PlayerNum = gm.RegisterPlayer(this);
+        uInteraction = GetComponent<UserInteraction>();
+
 
         foreach (Unit un in FindObjectsOfType<Unit>())
         {

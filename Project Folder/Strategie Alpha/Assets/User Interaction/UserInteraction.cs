@@ -13,9 +13,12 @@ public class UserInteraction : MonoBehaviour {
     private User user;
 
     public List<Transform> activeInteractable { get; private set; }
+    public float SelectMouseYBorder;
+    public float SelectMouseXBorder;
 
-    
-	void Start ()
+    private bool canSelect;
+
+    void Start ()
     {
         gm = GameMaster.Instance;
         cam = gm.MainCamera;
@@ -50,6 +53,14 @@ public class UserInteraction : MonoBehaviour {
     void StartSelect()
     {
         StartSelectPosition = cam.ScreenToViewportPoint(Input.mousePosition);
+        if (StartSelectPosition.y < SelectMouseYBorder)
+        {
+            canSelect = false;
+            StartSelectPosition.y = SelectMouseYBorder;
+            return;
+        }
+        canSelect = true;
+
         foreach (Transform t in activeInteractable)
         {
             t.GetComponent<Interactable>().Deactivate(this);
@@ -59,6 +70,12 @@ public class UserInteraction : MonoBehaviour {
     void MiddleSelect()
     {
         Vector2 mousePosition = cam.ScreenToViewportPoint(Input.mousePosition);
+        if (mousePosition.y < SelectMouseYBorder)
+            mousePosition.y = SelectMouseYBorder;
+
+        if (!canSelect)
+            return;
+
         if (StartSelectPosition.x < mousePosition.x)
         {
             UpperBox.x = mousePosition.x;
@@ -96,6 +113,8 @@ public class UserInteraction : MonoBehaviour {
 
     void Select()
     {
+        if (!canSelect)
+            return;
         activeInteractable.Clear();
         bool buildingSelect = false;
         foreach (Transform t in gm.PlayerInteractable[user.PlayerNum])

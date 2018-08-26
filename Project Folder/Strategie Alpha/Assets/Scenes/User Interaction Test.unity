@@ -1939,6 +1939,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114375312991172648, guid: 8a43b2a5cc6dc2a42a553d60d807b30b,
+        type: 2}
+      propertyPath: SelectMouseYBorder
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a43b2a5cc6dc2a42a553d60d807b30b, type: 2}
   m_IsPrefabAsset: 0
