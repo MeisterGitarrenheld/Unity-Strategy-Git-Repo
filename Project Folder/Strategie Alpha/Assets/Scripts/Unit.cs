@@ -57,13 +57,12 @@ public abstract class Unit : MonoBehaviour,Interactable {
 
 
 	#region Interactable implementation
-
-	public void Activate (UserInteraction interactor)
+	public virtual void Activate (UserInteraction interactor)
 	{
         //TODO
         unitUi.gameObject.SetActive(true);
 	}
-    public void Deactivate(UserInteraction interactor)
+    public virtual void Deactivate(UserInteraction interactor)
     {
         unitUi.gameObject.SetActive(false);
     }

@@ -18,4 +18,20 @@ public class CollectorUnit : Unit {
 	public void attack(){
 
 	}
+	override
+	public void Activate (UserInteraction interactor)
+	{
+		base.Activate (interactor);
+		GameMaster gm = GameMaster.Instance;
+		User user = gm.Players [owner];
+		user.ui.showCollectorMenu ();
+	}
+	override
+	public void Deactivate(UserInteraction interactor)
+	{
+		base.Deactivate (interactor);
+		GameMaster gm = GameMaster.Instance;
+		User user = gm.Players [owner];
+		user.ui.showNoneMenu ();
+	}
 }

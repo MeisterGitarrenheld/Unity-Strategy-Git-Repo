@@ -3,7 +3,13 @@ guid: 0a271223b3dbef94d99c3f080fc768d5
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - selectedUnitText: {instanceID: 0}
+  - mouseIndicator: {instanceID: 0}
+  - buildingButton: {fileID: 1155465612193434, guid: 285b8bd320d1d5740a814183cb20147e,
+      type: 2}
+  - buildingList: {fileID: 1866759324982044, guid: 2cf87b42ba6a3bb4d95306611bc55661,
+      type: 2}
   executionOrder: 200
   icon: {instanceID: 0}
   userData: 
