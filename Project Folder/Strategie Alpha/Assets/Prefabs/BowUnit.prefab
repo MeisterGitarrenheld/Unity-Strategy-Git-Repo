@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 136409385720229196}
   - component: {fileID: 114479904309849846}
   - component: {fileID: 195120408090013094}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BowUnit
   m_TagString: Untagged
   m_Icon: {fileID: 0}

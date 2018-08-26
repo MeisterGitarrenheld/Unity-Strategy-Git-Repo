@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 65354406335815068}
   - component: {fileID: 114182171984236772}
   - component: {fileID: 195663530014365012}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: AxtUnit
   m_TagString: Untagged
   m_Icon: {fileID: 0}

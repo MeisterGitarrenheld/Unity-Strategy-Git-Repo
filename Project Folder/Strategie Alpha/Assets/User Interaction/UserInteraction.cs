@@ -142,7 +142,14 @@ public class UserInteraction : MonoBehaviour {
     void MoveSelect()
     {
         RaycastHit hit;
-        if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out hit, 1000, 1 << LayerMask.NameToLayer("Ground")))
+        if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out hit, 1000, 1 << LayerMask.NameToLayer("UserInteraction")))
+        {
+            foreach (Transform t in activeInteractable)
+            {
+                t.GetComponent<Interactable>().setTarget(new WalkType(hit.collider.transform));
+            }
+        }
+        else if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out hit, 1000, 1 << LayerMask.NameToLayer("Ground")))
         {
             foreach (Transform t in activeInteractable)
             {
