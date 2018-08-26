@@ -13,7 +13,10 @@ public class AxeUnit : Unit, HitInterface {
     override
     public void updateUnit()
     {
-        
+        if (target != null)
+        {
+            agent.SetDestination(target.getTargetPosition());
+        }
     }
 
     override

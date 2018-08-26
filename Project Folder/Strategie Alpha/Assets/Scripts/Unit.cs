@@ -39,9 +39,6 @@ public abstract class Unit : MonoBehaviour,Interactable {
 		if (Health <= 0) {
 			Die ();
 		}
-		if (target != null) {
-			agent.SetDestination (target.getTargetPosition ());
-		}
 		updateUnit ();
 	}
 

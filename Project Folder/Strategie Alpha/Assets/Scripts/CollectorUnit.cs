@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollectorUnit : Unit {
+public class CollectorUnit : Unit, HitInterface
+{
 
 	void buildBuilding(Building building){
 
@@ -11,9 +12,12 @@ public class CollectorUnit : Unit {
 	// Update is called once per frame
 	override
 	public void updateUnit() {
+        if (target != null)
+        {
+            agent.SetDestination(target.getTargetPosition());
+        }
 
-
-	}
+    }
 	override
 	public void attack(){
 
@@ -34,4 +38,9 @@ public class CollectorUnit : Unit {
 		User user = gm.Players [owner];
 		user.ui.showNoneMenu ();
 	}
+
+    public void Hit(int damage)
+    {
+
+    }
 }

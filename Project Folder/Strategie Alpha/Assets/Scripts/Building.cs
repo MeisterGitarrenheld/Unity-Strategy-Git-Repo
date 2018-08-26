@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Building : MonoBehaviour,Interactable {
+public abstract class Building : MonoBehaviour,Interactable
+{
 
 	public int Health;
 	public WalkType target { get; protected set; }
@@ -54,5 +55,5 @@ public abstract class Building : MonoBehaviour,Interactable {
 	{
 		target = newTarget;
 	}
-
+    
 }

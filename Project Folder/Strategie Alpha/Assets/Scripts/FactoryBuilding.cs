@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FactoryBuilding : Building {
+public class FactoryBuilding : Building, HitInterface
+{
 
 	private List<Unit.UnitType> buildOrder = new List<Unit.UnitType> ();
 	private float currentBuildingTime = 0;
@@ -40,4 +41,9 @@ public class FactoryBuilding : Building {
 			}
 		} 
 	}
+
+    public void Hit(int damage)
+    {
+
+    }
 }
