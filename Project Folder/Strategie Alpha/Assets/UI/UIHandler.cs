@@ -37,8 +37,23 @@ public class UIHandler : MonoBehaviour {
 		if (currentMenu.Equals (Menu.COLLECTOR_BUILDING)) {
 			return;
 		}
+		foreach(GameObject building in buildings){
+			Sprite icon = building.GetComponent<Building>().icon;
+			GameObject button = Instantiate (buildingButton) as GameObject;
+			button.transform.SetParent (buildingList.transform);
+			button.GetComponent<Image> ().sprite = icon;
+
+			button.GetComponent<Button> ().onClick.AddListener (() => clickBuildingButton(building));
+		}
 		//buildingButton.GetComponent<Button>().
 
+	}
+	public void clickUnitButton(GameObject build){
+		Debug.Log("Build: "+ build.GetComponent<Unit>().name);
+	}
+	public void clickBuildingButton(GameObject build){
+		//Display "Ghost Building" to place it
+		Debug.Log("Build: "+ build.GetComponent<Building>().name);
 	}
 	public void showNoneMenu(){
 		//Menü bereits sichtbar?
@@ -46,6 +61,7 @@ public class UIHandler : MonoBehaviour {
 			return;
 		}
 		bool jumpFirst = false;
+		Debug.Log ("Delete!");
 		foreach (Transform t in buildingList.transform) {
 			if (!jumpFirst) {
 				jumpFirst = true;

@@ -70,6 +70,7 @@ public abstract class Unit : MonoBehaviour,Interactable {
     public virtual void Deactivate(UserInteraction interactor)
     {
         unitUi.gameObject.SetActive(false);
+		Debug.Log ("Deactivate: Unit");
     }
 
     #endregion

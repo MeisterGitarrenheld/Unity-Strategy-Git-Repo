@@ -36,6 +36,7 @@ public class CollectorUnit : Unit, HitInterface
 		base.Deactivate (interactor);
 		GameMaster gm = GameMaster.Instance;
 		User user = gm.Players [owner];
+		Debug.Log ("Deactivate: CollectorUnit");
 		user.ui.showNoneMenu ();
 	}
 

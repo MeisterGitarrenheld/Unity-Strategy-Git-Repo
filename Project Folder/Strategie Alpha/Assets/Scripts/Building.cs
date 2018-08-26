@@ -9,6 +9,7 @@ public abstract class Building : MonoBehaviour,Interactable
 	public WalkType target { get; protected set; }
 	protected byte owner;
     protected BuildingUi buildingUi;
+	public Sprite icon;
 
 	public byte getOwner(){
 		return owner;
