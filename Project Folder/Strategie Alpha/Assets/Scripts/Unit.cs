@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public abstract class Unit : MonoBehaviour,Interactable {
 	public enum UnitType {
@@ -9,13 +10,17 @@ public abstract class Unit : MonoBehaviour,Interactable {
 		BOW_UNIT,
 		COLLECTOR_UNIT
 	}
-	protected byte owner;
+    protected byte owner;
+    public float AttackRange;
+    public int Damage;
 	public float AttackSpeed;
 	public NavMeshAgent agent;
 	public int Health;
 	public UnitType Type;
+    public Sprite Icon;
 	public WalkType target { get; protected set; }
     protected UnitUi unitUi;
+    protected bool dead;
 
 	public void setOwner(byte owner){
 		this.owner = owner;
@@ -47,7 +52,10 @@ public abstract class Unit : MonoBehaviour,Interactable {
 	}
 
 	void Die() {
-		Destroy (this.gameObject);
+        dead = true;
+        GameMaster.Instance.UnRegisterInteractable(transform, owner);
+        GameMaster.Instance.Players[owner].uInteraction.activeInteractable.Remove(transform);
+        Destroy (this.gameObject);
 	}
 
 	public abstract void attack();

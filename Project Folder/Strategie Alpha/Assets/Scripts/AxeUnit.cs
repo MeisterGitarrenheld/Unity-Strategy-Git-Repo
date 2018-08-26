@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class AxeUnit : Unit, HitInterface {
 
-    public float AttackRange;
-    public int Damage;
     private HitInterface HitTarget;
     private float attackTimer;
 
@@ -13,24 +11,51 @@ public class AxeUnit : Unit, HitInterface {
     override
     public void updateUnit()
     {
-        if (target != null)
+        if (target != null && !dead)
         {
-            agent.SetDestination(target.getTargetPosition());
+            if (target.WType == WType.Attack && target.attackTarget != null)
+            {
+                if (HitTarget == null)
+                    HitTarget = target.attackTarget.GetComponent<HitInterface>();
+                if (Vector3.Distance(transform.position, target.getTargetPosition()) > AttackRange)
+                {
+                    agent.isStopped = false;
+                    agent.SetDestination(target.getTargetPosition());
+                }
+                else
+                {
+                    agent.isStopped = true;
+                    attack();
+                }
+            }
+            else if (target.WType == WType.Walk && Vector3.Distance(transform.position, target.getTargetPosition()) > 1)
+            {
+                agent.isStopped = false;
+                agent.SetDestination(target.getTargetPosition());
+            }
+            else
+            {
+                target = null;
+                agent.isStopped = true;
+            }
         }
     }
 
     override
     public void attack()
     {
-        if (HitTarget != null)
+        if (HitTarget != null && target.attackTarget != null)
         {
             attackTimer += Time.deltaTime;
             if (attackTimer >= AttackSpeed)
             {
-                HitTarget.Hit(Damage);
+
+                target.attackTarget.GetComponent<HitInterface>().Hit(Damage);
                 attackTimer = 0;
             }
         }
+        else
+            target = null;
     }
 
     public void Hit(int damage)

@@ -64,7 +64,8 @@ public class UserInteraction : MonoBehaviour {
 
     void DoubleClickSelect()
     {
-        if(doubleClickType != (Unit.UnitType)noType)
+        CheckSelected();
+        if (doubleClickType != (Unit.UnitType)noType)
         {
             activeInteractable.Clear();
             doubleClickSelect = true;
@@ -102,6 +103,7 @@ public class UserInteraction : MonoBehaviour {
 
     void StartSelect()
     {
+        CheckSelected();
         StartSelectPosition = cam.ScreenToViewportPoint(Input.mousePosition);
         if (StartSelectPosition.y < SelectMouseYBorder)
         {
@@ -113,7 +115,8 @@ public class UserInteraction : MonoBehaviour {
 
         foreach (Transform t in activeInteractable)
         {
-            t.GetComponent<Interactable>().Deactivate(this);
+            if (t != null && t.gameObject.activeInHierarchy)
+                t.GetComponent<Interactable>().Deactivate(this);
         }
         activeInteractable.Clear();
     }
@@ -163,6 +166,7 @@ public class UserInteraction : MonoBehaviour {
 
     void Select()
     {
+        CheckSelected();
         if (!canSelect)
             return;
         activeInteractable.Clear();
@@ -232,12 +236,14 @@ public class UserInteraction : MonoBehaviour {
 
     void MoveSelect()
     {
+        CheckSelected();
         RaycastHit hit;
         if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out hit, 1000, 1 << LayerMask.NameToLayer("UserInteraction")))
         {
             foreach (Transform t in activeInteractable)
             {
-                t.GetComponent<Interactable>().setTarget(new WalkType(hit.collider.transform));
+                if (t != null && t.gameObject.activeInHierarchy)
+                    t.GetComponent<Interactable>().setTarget(new WalkType(hit.collider.transform));
             }
         }
         else if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out hit, 1000, 1 << LayerMask.NameToLayer("Ground")))
@@ -249,10 +255,27 @@ public class UserInteraction : MonoBehaviour {
                 {
                     if (i * squareSize + j >= activeInteractable.Count)
                         return;
-                    activeInteractable[i * squareSize + j].GetComponent<Interactable>().setTarget(new WalkType(hit.point + new Vector3(j*3, 0, i*3)));
+                    if (activeInteractable[i * squareSize + j] != null && activeInteractable[i * squareSize + j].gameObject.activeInHierarchy)
+                        activeInteractable[i * squareSize + j].GetComponent<Interactable>().setTarget(new WalkType(hit.point + new Vector3(j * 3, 0, i * 3)));
                 }
             }
         }
+    }
+
+    void CheckSelected()
+    {
+        List<Transform> todestroy = new List<Transform>();
+        foreach(Transform t in activeInteractable)
+        {
+            if (t == null || !t.gameObject.activeInHierarchy)
+            {
+                todestroy.Add(t);
+                gm.UnRegisterInteractable(t, user.PlayerNum);
+            }
+        }
+        foreach (Transform t in todestroy)
+            activeInteractable.Remove(t);
+        todestroy.Clear();
     }
 
 
