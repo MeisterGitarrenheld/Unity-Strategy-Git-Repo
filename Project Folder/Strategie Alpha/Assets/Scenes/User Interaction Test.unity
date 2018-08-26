@@ -948,10 +948,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1ffe8f4955ae1143beb6c58826c40c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackSpeed: 0
+  AttackSpeed: 1
   agent: {fileID: 617360209}
   Health: 100
   Type: 1
+  AttackRange: 1
+  Damage: 10
 --- !u!65 &617360211
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2160,10 +2162,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1ffe8f4955ae1143beb6c58826c40c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackSpeed: 0
+  AttackSpeed: 1
   agent: {fileID: 1451825919}
   Health: 100
   Type: 1
+  AttackRange: 1
+  Damage: 10
 --- !u!65 &1451825921
 BoxCollider:
   m_ObjectHideFlags: 0

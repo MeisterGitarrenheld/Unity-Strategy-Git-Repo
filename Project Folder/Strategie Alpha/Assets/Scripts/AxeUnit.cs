@@ -2,16 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AxeUnit : Unit {
-	
-	// Update is called once per frame
-	override
-	public void updateUnit() {
+public class AxeUnit : Unit, HitInterface {
 
+    public float AttackRange;
+    public int Damage;
+    private HitInterface HitTarget;
+    private float attackTimer;
 
-	}
-	override
-	public void attack(){
+    // Update is called once per frame
+    override
+    public void updateUnit()
+    {
+        
+    }
 
-	}
+    override
+    public void attack()
+    {
+        if (HitTarget != null)
+        {
+            attackTimer += Time.deltaTime;
+            if (attackTimer >= AttackSpeed)
+            {
+                HitTarget.Hit(Damage);
+                attackTimer = 0;
+            }
+        }
+    }
+
+    public void Hit(int damage)
+    {
+        Health -= damage;
+    }
 }
