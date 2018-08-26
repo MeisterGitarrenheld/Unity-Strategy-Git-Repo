@@ -50,6 +50,11 @@ public class UserInteraction : MonoBehaviour {
     void StartSelect()
     {
         StartSelectPosition = cam.ScreenToViewportPoint(Input.mousePosition);
+        foreach (Transform t in activeInteractable)
+        {
+            t.GetComponent<Interactable>().Deactivate(this);
+        }
+        activeInteractable.Clear();
     }
     void MiddleSelect()
     {
@@ -151,9 +156,15 @@ public class UserInteraction : MonoBehaviour {
         }
         else if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out hit, 1000, 1 << LayerMask.NameToLayer("Ground")))
         {
-            foreach (Transform t in activeInteractable)
+            int squareSize = Mathf.CeilToInt(Mathf.Sqrt(activeInteractable.Count));
+            for (int i = 0; i < squareSize; i++)
             {
-                t.GetComponent<Interactable>().setTarget(new WalkType(hit.point));
+                for (int j = 0; j < squareSize; j++)
+                {
+                    if (i * squareSize + j >= activeInteractable.Count)
+                        return;
+                    activeInteractable[i * squareSize + j].GetComponent<Interactable>().setTarget(new WalkType(hit.point + new Vector3(j*3, 0, i*3)));
+                }
             }
         }
     }

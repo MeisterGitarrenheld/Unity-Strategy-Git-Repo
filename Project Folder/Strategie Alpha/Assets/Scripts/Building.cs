@@ -5,9 +5,9 @@ using UnityEngine;
 public abstract class Building : MonoBehaviour,Interactable {
 
 	public int Health;
-	private WalkType target;
+	public WalkType target { get; protected set; }
 	protected byte owner;
-
+    protected BuildingUi buildingUi;
 
 	public byte getOwner(){
 		return owner;
@@ -16,7 +16,11 @@ public abstract class Building : MonoBehaviour,Interactable {
 	public void setOwner(byte owner){
 		this.owner = owner;
 	}
-	
+    public void Start()
+    {
+        buildingUi = GetComponentInChildren<BuildingUi>();
+        buildingUi.gameObject.SetActive(false);
+    }
 	// Update is called once per frame
 	void Update () {
 		updateBuilding ();
@@ -36,13 +40,19 @@ public abstract class Building : MonoBehaviour,Interactable {
 
 	public void Activate (UserInteraction interactor)
 	{
-		//TODO  
+        //TODO  
+        buildingUi.gameObject.SetActive(true);
 	}
 
-	#endregion
+    public void Deactivate(UserInteraction interactor)
+    {
+        buildingUi.gameObject.SetActive(false);
+    }
+    #endregion
 
-	public void setTarget (WalkType newTarget)
+    public void setTarget (WalkType newTarget)
 	{
 		target = newTarget;
 	}
+
 }

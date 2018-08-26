@@ -18,6 +18,11 @@ public class BoxInteractionHandler : MonoBehaviour, Interactable {
 
     }
 
+    public void Deactivate(UserInteraction interactor)
+    {
+
+    }
+
     public void setTarget(WalkType newTarget)
     {
         transform.parent.position = newTarget.getTargetPosition() + new Vector3(

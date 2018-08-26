@@ -14,7 +14,8 @@ public abstract class Unit : MonoBehaviour,Interactable {
 	public NavMeshAgent agent;
 	public int Health;
 	public UnitType Type;
-	protected WalkType target;
+	public WalkType target { get; protected set; }
+    protected UnitUi unitUi;
 
 	public void setOwner(byte owner){
 		this.owner = owner;
@@ -29,11 +30,12 @@ public abstract class Unit : MonoBehaviour,Interactable {
 
 	// Use this for initialization
 	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        unitUi = transform.GetComponentInChildren<UnitUi>();
+        unitUi.gameObject.SetActive(false);
+    }
+
+    // Update is called once per frame
+    void Update () {
 		if (Health <= 0) {
 			Die ();
 		}
@@ -58,10 +60,16 @@ public abstract class Unit : MonoBehaviour,Interactable {
 
 	public void Activate (UserInteraction interactor)
 	{
-		//TODO
+        //TODO
+        unitUi.gameObject.SetActive(true);
 	}
+    public void Deactivate(UserInteraction interactor)
+    {
+        unitUi.gameObject.SetActive(false);
+    }
 
-	#endregion
+    #endregion
 
-	public abstract void updateUnit();
+    public abstract void updateUnit();
+
 }
