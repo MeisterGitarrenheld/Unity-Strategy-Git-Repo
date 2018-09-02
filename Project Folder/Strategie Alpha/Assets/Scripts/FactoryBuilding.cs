@@ -27,8 +27,12 @@ public class FactoryBuilding : Building, HitInterface
 	// Update is called once per frame
 	override
 	public void updateBuilding () {
+		if (currentJob.Equals(Unit.UnitType.NONE) && buildOrder.Count == 0) {
+			return;
+		}
 		currentBuildingTime -= factorySpeed;
-		if (currentBuildingTime <= 0) {			
+		if (currentBuildingTime <= 0) {
+			
 			if (currentJob != 0) {
 				GameObject obj = Instantiate (listOfUnits [(int)currentJob], this.transform.position, this.transform.rotation);
 				GameMaster.Instance.RegisterInteractable(obj.transform, owner);
@@ -36,12 +40,16 @@ public class FactoryBuilding : Building, HitInterface
 			}
 			if (buildOrder.Count != 0) {
 				currentJob = buildOrder [0];
-				buildOrder.Remove (0);
+				buildOrder.RemoveAt (0);
 				currentBuildingTime = buildTimes [(int)currentJob];
+			} else {
+				currentJob = 0;
 			}
 		} 
 	}
-
+	public void addToList(Unit.UnitType type) {
+		buildOrder.Add (type);
+	}
     public void Hit(int damage)
     {
 

@@ -66,7 +66,11 @@ public class UIHandler : MonoBehaviour {
 			button.transform.SetParent (buildingList.transform);
 			button.GetComponent<Image> ().sprite = icon;
 
-			button.GetComponent<Button> ().onClick.AddListener (() => clickBuildingButton(building));
+			if (currentMenu.Equals (Menu.COLLECTOR_BUILDING)) {
+				button.GetComponent<Button> ().onClick.AddListener (() => clickBuildingButton (building));
+			} else {
+				button.GetComponent<Button> ().onClick.AddListener (() => clickUnitButton (building));
+			}
 		}
 	}
 	private Sprite getSprite(GameObject go) {
@@ -76,6 +80,7 @@ public class UIHandler : MonoBehaviour {
 			return go.GetComponent<Unit>().icon;
 	}
 	public void clickUnitButton(GameObject build){
+		user.uInteraction.activeInteractable[0].gameObject.GetComponent<FactoryBuilding>().addToList(build.GetComponent<Unit>().getType());
 		Debug.Log("Build: "+ build.GetComponent<Unit>().name);
 	}
 	public void clickBuildingButton(GameObject build){

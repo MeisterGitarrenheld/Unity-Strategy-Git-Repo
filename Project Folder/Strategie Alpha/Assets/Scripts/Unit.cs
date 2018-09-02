@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public abstract class Unit : MonoBehaviour,Interactable {
 	public enum UnitType {
+		NONE,
 		AXE_UNIT,
 		BOW_UNIT,
 		COLLECTOR_UNIT

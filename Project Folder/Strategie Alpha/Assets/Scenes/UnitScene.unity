@@ -721,8 +721,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f9496549be78cb43a9e9adca1874d3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectMouseYBorder: 0
+  SelectMouseYBorder: 0.25
   SelectMouseXBorder: 0
+  TestObject: {fileID: 0}
 --- !u!114 &1317189186
 MonoBehaviour:
   m_ObjectHideFlags: 0
