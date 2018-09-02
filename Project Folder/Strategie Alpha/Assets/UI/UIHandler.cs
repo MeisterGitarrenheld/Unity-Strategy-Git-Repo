@@ -35,9 +35,7 @@ public class UIHandler : MonoBehaviour {
         rectTrans = GetComponent<RectTransform>();
         Width = rectTrans.rect.width;
         Height = rectTrans.rect.height;
-		Debug.Log ("Test: " + completeBuildingList.Length);
 		foreach(GameObject go in completeBuildingList){
-			Debug.Log ("Test: " + (go.GetComponent<Building> () != null));
 			if (go.GetComponent<Building> () != null) {
 				collectorMenu.Add (go);
 			} 
