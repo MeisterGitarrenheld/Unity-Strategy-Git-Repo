@@ -25,6 +25,7 @@ public abstract class Building : MonoBehaviour, Interactable
     {
         buildingUi = GetComponentInChildren<BuildingUi>();
         buildingUi.gameObject.SetActive(false);
+		target = new WalkType (transform.position);
     }
     // Update is called once per frame
     void Update()

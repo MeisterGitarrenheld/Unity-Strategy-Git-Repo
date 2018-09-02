@@ -252,10 +252,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 1569068812183114, guid: c07699472f9ac024da786731eb9af42b, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c07699472f9ac024da786731eb9af42b, type: 2}
   m_IsPrefabAsset: 0
@@ -359,10 +355,6 @@ Prefab:
     - target: {fileID: 4039947747404684, guid: b1cc1abb014e7c24fb8b6a124b3eb9cf, type: 2}
       propertyPath: m_RootOrder
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1774397342367182, guid: b1cc1abb014e7c24fb8b6a124b3eb9cf, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1cc1abb014e7c24fb8b6a124b3eb9cf, type: 2}
@@ -723,7 +715,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SelectMouseYBorder: 0.25
   SelectMouseXBorder: 0
-  TestObject: {fileID: 0}
 --- !u!114 &1317189186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -787,6 +778,21 @@ Prefab:
     - target: {fileID: 4526707958044900, guid: e0ce21f7536e76b4d81cdd8b2ea669af, type: 2}
       propertyPath: m_RootOrder
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114931813430467814, guid: e0ce21f7536e76b4d81cdd8b2ea669af,
+        type: 2}
+      propertyPath: buildTimes.Array.data[1]
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 114931813430467814, guid: e0ce21f7536e76b4d81cdd8b2ea669af,
+        type: 2}
+      propertyPath: buildTimes.Array.data[0]
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 114931813430467814, guid: e0ce21f7536e76b4d81cdd8b2ea669af,
+        type: 2}
+      propertyPath: buildTimes.Array.data[2]
+      value: 600
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0ce21f7536e76b4d81cdd8b2ea669af, type: 2}

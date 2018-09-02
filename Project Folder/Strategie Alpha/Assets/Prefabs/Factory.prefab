@@ -510,10 +510,10 @@ MonoBehaviour:
   - {fileID: 1774397342367182, guid: b1cc1abb014e7c24fb8b6a124b3eb9cf, type: 2}
   - {fileID: 1569068812183114, guid: c07699472f9ac024da786731eb9af42b, type: 2}
   buildTimes:
-  - 0
-  - 5
-  - 6
   - 2
+  - 500
+  - 600
+  - 200
 --- !u!222 &222322616694609330
 CanvasRenderer:
   m_ObjectHideFlags: 1

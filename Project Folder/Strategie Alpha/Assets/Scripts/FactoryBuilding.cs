@@ -35,6 +35,7 @@ public class FactoryBuilding : Building, HitInterface
 			
 			if (currentJob != 0) {
 				GameObject obj = Instantiate (listOfUnits [(int)currentJob-1], this.transform.position, this.transform.rotation);
+				obj.GetComponent<Unit>().agent.SetDestination(target.getTargetPosition());
 				GameMaster.Instance.RegisterInteractable(obj.transform, owner);
 				currentJob = 0;
 			}
