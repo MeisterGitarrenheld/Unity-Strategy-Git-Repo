@@ -57,7 +57,7 @@ public class GameMaster : MonoBehaviour {
         //Add Ui to first User without Ui
         foreach(User user in Players)
         {
-            if(user.ui == null)
+            if(user.ui == null && user.UType == UserType.Local)
             {
                 user.ui = ui;
                 return user;

@@ -2,39 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum UserType
+{
+    Local,
+    Network,
+    Computer
+}
+
 public class User : MonoBehaviour {
 
-    public byte PlayerNum { get; private set; }
+    public byte PlayerNum { get; protected set; }
     [HideInInspector]
     public UIHandler ui;
 
-    private GameMaster gm;
-    public UserInteraction uInteraction { get; private set; }
+    protected GameMaster gm;
+    public UserInteraction uInteraction { get; protected set; }
+    public UserType UType { get; protected set; }
 
 	void Start ()
     {
         gm = GameMaster.Instance;
         PlayerNum = gm.RegisterPlayer(this);
-        uInteraction = GetComponent<UserInteraction>();
-
-
-        foreach (Unit un in FindObjectsOfType<Unit>())
-        {
-            gm.RegisterInteractable(un.transform, PlayerNum);
-        }
-
-        foreach (Building un in FindObjectsOfType<Building>())
-        {
-            gm.RegisterInteractable(un.transform, PlayerNum);
-            un.Place();
-        }
-
-
+        Init();
     }
-	
 
-	void Update ()
-    {
-		
-	}
+    protected virtual void Init() { }
 }

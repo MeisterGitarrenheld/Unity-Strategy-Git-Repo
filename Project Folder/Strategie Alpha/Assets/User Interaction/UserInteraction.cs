@@ -220,7 +220,7 @@ public class UserInteraction : MonoBehaviour
                     doubleClickType = unit.Type;
                     buildingSelect = false;
                 }
-                if (t.GetComponent<Building>() != null && activeInteractable.Count == 0)
+                if (t.GetComponent<Building>() != null && t.GetComponent<Building>().getOwner() == user.PlayerNum &&  activeInteractable.Count == 0)
                 {
                     activeInteractable.Clear();
                     activeInteractable.Add(t);
