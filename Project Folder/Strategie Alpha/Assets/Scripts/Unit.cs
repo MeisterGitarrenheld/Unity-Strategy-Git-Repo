@@ -17,7 +17,7 @@ public abstract class Unit : MonoBehaviour,Interactable {
 	public NavMeshAgent agent;
 	public int Health;
 	public UnitType Type;
-    public Sprite Icon;
+    public Sprite icon;
 	public WalkType target { get; protected set; }
     protected UnitUi unitUi;
     protected bool dead;

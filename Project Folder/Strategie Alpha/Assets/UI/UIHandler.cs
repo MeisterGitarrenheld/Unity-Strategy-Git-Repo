@@ -60,13 +60,19 @@ public class UIHandler : MonoBehaviour {
 			break;
 		}
 		foreach(GameObject building in menuItems){
-			Sprite icon = building.GetComponent<Building>().icon;
+			Sprite icon = getSprite (building);
 			GameObject button = Instantiate (buildingButton) as GameObject;
 			button.transform.SetParent (buildingList.transform);
 			button.GetComponent<Image> ().sprite = icon;
 
 			button.GetComponent<Button> ().onClick.AddListener (() => clickBuildingButton(building));
 		}
+	}
+	private Sprite getSprite(GameObject go) {
+		if(currentMenu.Equals(Menu.COLLECTOR_BUILDING))
+			return go.GetComponent<Building>().icon;
+		else 
+			return go.GetComponent<Unit>().icon;
 	}
 	public void clickUnitButton(GameObject build){
 		Debug.Log("Build: "+ build.GetComponent<Unit>().name);
