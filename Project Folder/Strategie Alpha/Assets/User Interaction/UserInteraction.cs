@@ -45,7 +45,9 @@ public class UserInteraction : MonoBehaviour
                 ghostBuilding.transform.position = hit.point + Vector3.up * 3;
             }
 
-            if (Input.GetMouseButtonUp(0))
+
+            Vector3 mousePos = StartSelectPosition = cam.ScreenToViewportPoint(Input.mousePosition);
+            if (Input.GetMouseButtonUp(0) && mousePos.y > SelectMouseYBorder)
                 EndBuilding();
             else if (Input.GetMouseButtonUp(1))
                 AbortBuilding();
@@ -303,6 +305,8 @@ public class UserInteraction : MonoBehaviour
 
     public void StartBuilding(GameObject building)
     {
+        if (placingBuilding)
+            return;
         ghostBuilding = Instantiate(building);
         ghostBuilding.GetComponent<Building>().Init();
         placingBuilding = true;
