@@ -51,7 +51,7 @@ public class FactoryBuilding : Building, HitInterface
 	}
     public void Hit(int damage)
     {
-
+		Health -= damage;
     }
 
 	override

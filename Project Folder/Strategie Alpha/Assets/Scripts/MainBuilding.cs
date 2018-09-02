@@ -13,7 +13,7 @@ public class MainBuilding : Building, HitInterface
 
     public void Hit(int damage)
     {
-
+		Health -= damage;
     }
 
     // Update is called once per frame
