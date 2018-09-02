@@ -8,7 +8,7 @@ public class MainBuilding : Building, HitInterface
 	private float currentBuildingTime = 0;
 	public float factorySpeed;
 	public GameObject[] listOfUnits;
-	private Unit.UnitType currentJob = 0;
+	private Unit.UnitType currentJob = Unit.UnitType.NONE;
 	public float[] buildTimes;
 
     public void Hit(int damage)

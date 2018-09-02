@@ -684,10 +684,10 @@ MonoBehaviour:
   buildingButton: {fileID: 1155465612193434, guid: 285b8bd320d1d5740a814183cb20147e,
     type: 2}
   buildingList: {fileID: 1105133628265512}
-  buildings:
-  - {fileID: 1551699610229282, guid: e0ce21f7536e76b4d81cdd8b2ea669af, type: 2}
+  completeBuildingList:
   - {fileID: 1441549289369646, guid: 9591ab18640513a4782a521f19bd2a22, type: 2}
-  units:
+  - {fileID: 1551699610229282, guid: e0ce21f7536e76b4d81cdd8b2ea669af, type: 2}
+  completeUnitList:
   - {fileID: 1569068812183114, guid: c07699472f9ac024da786731eb9af42b, type: 2}
   - {fileID: 1012720102661232, guid: f2cec7e5fe4bde149ad734b773c28cc8, type: 2}
   - {fileID: 1774397342367182, guid: b1cc1abb014e7c24fb8b6a124b3eb9cf, type: 2}

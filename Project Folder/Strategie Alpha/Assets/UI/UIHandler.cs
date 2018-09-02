@@ -21,9 +21,13 @@ public class UIHandler : MonoBehaviour {
     private RectTransform rectTrans;
 	public GameObject buildingButton;
 	public GameObject buildingList;
-	public GameObject[] buildings;
-	public GameObject[] units;
+	public GameObject[] completeBuildingList;
+	public GameObject[] completeUnitList;
     private User user;
+
+	private List<GameObject> factoryMenu = new List<GameObject> ();
+	private List<GameObject> mainMenu = new List<GameObject> ();
+	private List<GameObject> collectorMenu = new List<GameObject> ();
 
 	void Start () {
         gm = GameMaster.Instance;
@@ -31,6 +35,20 @@ public class UIHandler : MonoBehaviour {
         rectTrans = GetComponent<RectTransform>();
         Width = rectTrans.rect.width;
         Height = rectTrans.rect.height;
+		Debug.Log ("Test: " + completeBuildingList.Length);
+		foreach(GameObject go in completeBuildingList){
+			Debug.Log ("Test: " + (go.GetComponent<Building> () != null));
+			if (go.GetComponent<Building> () != null) {
+				collectorMenu.Add (go);
+			} 
+		}
+		foreach (GameObject go in completeUnitList) {
+			if (go.GetComponent<CollectorUnit> () != null) {
+				mainMenu.Add (go);
+			} else {
+				factoryMenu.Add (go);
+			}
+		}
 	}
 
 	public void showCollectorMenu(){
@@ -50,14 +68,13 @@ public class UIHandler : MonoBehaviour {
 		GameObject[] menuItems = new GameObject[0];
 		switch (menu) {
 		case Menu.COLLECTOR_BUILDING:
-			menuItems = buildings;
+			menuItems = collectorMenu.ToArray();
 			break;
 		case Menu.FACTORY_BUILDING:
-			menuItems = units;
+			menuItems = factoryMenu.ToArray();
 			break;
 		case Menu.MAIN_BUILDING:
-			menuItems = new GameObject[1];
-			menuItems [0] = units [0];
+			menuItems = mainMenu.ToArray();
 			break;
 		}
 		foreach(GameObject building in menuItems){
