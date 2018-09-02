@@ -40,13 +40,13 @@ public abstract class Building : MonoBehaviour,Interactable
 
 	#region Interactable implementation
 
-	public void Activate (UserInteraction interactor)
+	public virtual void Activate (UserInteraction interactor)
 	{
         //TODO  
         buildingUi.gameObject.SetActive(true);
 	}
 
-    public void Deactivate(UserInteraction interactor)
+    public virtual void Deactivate(UserInteraction interactor)
     {
         buildingUi.gameObject.SetActive(false);
     }
