@@ -390,7 +390,7 @@ MonoBehaviour:
   agent: {fileID: 195120408090013094}
   Health: 50
   Type: 2
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 698c5cff4c8865340844335303018d76, type: 3}
 --- !u!114 &114489944712171084
 MonoBehaviour:
   m_ObjectHideFlags: 1
