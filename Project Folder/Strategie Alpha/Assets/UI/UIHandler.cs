@@ -80,7 +80,8 @@ public class UIHandler : MonoBehaviour {
 	}
 	public void clickBuildingButton(GameObject build){
 		//Display "Ghost Building" to place it
-		Debug.Log("Build: "+ build.GetComponent<Building>().name);
+		//Debug.Log("Build: "+ build.GetComponent<Building>().name);
+        user.uInteraction.StartBuilding(build);
 	}
 	public void showNoneMenu(){
 		//Menü bereits sichtbar?

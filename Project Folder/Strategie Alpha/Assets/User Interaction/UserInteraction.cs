@@ -26,8 +26,6 @@ public class UserInteraction : MonoBehaviour
     private GameObject ghostBuilding;
     private bool placingBuilding;
 
-    public GameObject TestObject;
-
     void Start()
     {
         gm = GameMaster.Instance;
@@ -55,8 +53,8 @@ public class UserInteraction : MonoBehaviour
             return;
         }
 
-        if (Input.GetMouseButtonDown(2))
-            StartBuilding(TestObject);
+        //if (Input.GetMouseButtonDown(2))
+        //    StartBuilding(TestObject);
 
         if (Input.GetMouseButtonDown(0))
         {
