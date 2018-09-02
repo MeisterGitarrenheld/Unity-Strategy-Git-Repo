@@ -6,10 +6,10 @@ using UnityEngine.UI;
 
 public abstract class Unit : MonoBehaviour,Interactable {
 	public enum UnitType {
-		NONE,
+		COLLECTOR_UNIT,
 		AXE_UNIT,
 		BOW_UNIT,
-		COLLECTOR_UNIT
+		NONE
 	}
     protected byte owner;
     public float AttackRange;

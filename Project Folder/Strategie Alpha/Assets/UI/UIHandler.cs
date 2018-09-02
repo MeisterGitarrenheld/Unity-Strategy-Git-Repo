@@ -80,7 +80,15 @@ public class UIHandler : MonoBehaviour {
 			return go.GetComponent<Unit>().icon;
 	}
 	public void clickUnitButton(GameObject build){
-		user.uInteraction.activeInteractable[0].gameObject.GetComponent<FactoryBuilding>().addToList(build.GetComponent<Unit>().getType());
+		GameObject selected = user.uInteraction.activeInteractable [0].gameObject;
+		if(currentMenu.Equals(Menu.FACTORY_BUILDING)){
+			selected.GetComponent<FactoryBuilding>().addToList(build.GetComponent<Unit>().getType());
+		}
+		else{
+			selected.GetComponent<MainBuilding>().addToList(build.GetComponent<Unit>().getType());
+		}
+
+
 		Debug.Log("Build: "+ build.GetComponent<Unit>().name);
 	}
 	public void clickBuildingButton(GameObject build){

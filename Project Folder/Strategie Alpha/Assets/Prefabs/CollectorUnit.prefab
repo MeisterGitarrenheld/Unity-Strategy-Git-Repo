@@ -440,7 +440,7 @@ MonoBehaviour:
   AttackSpeed: 0
   agent: {fileID: 195559809183764202}
   Health: 30
-  Type: 3
+  Type: 0
   icon: {fileID: 0}
 --- !u!114 &114913646897872728
 MonoBehaviour:

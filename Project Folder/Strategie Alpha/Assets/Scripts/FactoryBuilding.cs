@@ -9,12 +9,9 @@ public class FactoryBuilding : Building, HitInterface
 	private float currentBuildingTime = 0;
 	public float factorySpeed;
 	public GameObject[] listOfUnits;
-	private Unit.UnitType currentJob = 0;
+	private Unit.UnitType currentJob = Unit.UnitType.NONE;
 	public float[] buildTimes;
 
-	public void buildUnit(Unit.UnitType type){
-		buildOrder.Add (type);
-	}
 	public void discardUnit(Unit.UnitType type){
 		for (int i = buildOrder.Count - 1; i >= 0; i--) {
 			if (buildOrder [i].Equals (type)) {
@@ -31,10 +28,11 @@ public class FactoryBuilding : Building, HitInterface
 			return;
 		}
 		currentBuildingTime -= factorySpeed;
+
 		if (currentBuildingTime <= 0) {
 			
-			if (currentJob != 0) {
-				GameObject obj = Instantiate (listOfUnits [(int)currentJob-1], this.transform.position, this.transform.rotation);
+			if ((int)currentJob != 3) {
+				GameObject obj = Instantiate (listOfUnits [(int)currentJob], this.transform.position, this.transform.rotation);
 				obj.GetComponent<Unit>().agent.SetDestination(target.getTargetPosition());
 				GameMaster.Instance.RegisterInteractable(obj.transform, owner);
 				currentJob = 0;
@@ -44,7 +42,7 @@ public class FactoryBuilding : Building, HitInterface
 				buildOrder.RemoveAt (0);
 				currentBuildingTime = buildTimes [(int)currentJob];
 			} else {
-				currentJob = 0;
+				currentJob = Unit.UnitType.NONE;
 			}
 		} 
 	}
