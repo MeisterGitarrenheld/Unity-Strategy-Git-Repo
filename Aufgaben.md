@@ -1,5 +1,9 @@
 ### Aufgaben _(offen)_
 * gameMaster-Script (Mit Referenz auf Terrein)
+* Häuser Bauen       \
+* Einheiten bauen     > Baumenü erstellen
+* Einheiten greifen an
+* Einheitenmovement
 
 ### Aufgaben Tom
 * **NavMesh anschauen** (Status: Work in Progress)

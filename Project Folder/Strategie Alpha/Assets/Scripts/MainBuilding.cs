@@ -17,4 +17,21 @@ public class MainBuilding : Building, HitInterface
 
 		}
 	}
+
+	override
+	public void Activate (UserInteraction interactor)
+	{
+		base.Activate (interactor);
+		GameMaster gm = GameMaster.Instance;
+		User user = gm.Players [owner];
+		user.ui.showMainBuildingMenu ();
+	}
+	override
+	public void Deactivate(UserInteraction interactor)
+	{
+		base.Deactivate (interactor);
+		GameMaster gm = GameMaster.Instance;
+		User user = gm.Players [owner];
+		user.ui.showNoneMenu ();
+	}
 }
