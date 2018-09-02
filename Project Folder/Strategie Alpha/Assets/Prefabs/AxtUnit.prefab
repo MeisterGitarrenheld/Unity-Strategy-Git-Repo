@@ -296,7 +296,7 @@ MonoBehaviour:
   agent: {fileID: 195663530014365012}
   Health: 100
   Type: 1
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 426d7f6cee1fe534c866590b978997c9, type: 3}
 --- !u!114 &114210998849814184
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -2,49 +2,56 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Building : MonoBehaviour,Interactable
+public abstract class Building : MonoBehaviour, Interactable
 {
 
-	public int Health;
-	public WalkType target { get; protected set; }
-	protected byte owner;
+    public int Health;
+    public WalkType target { get; protected set; }
+    protected byte owner;
     protected BuildingUi buildingUi;
-	public Sprite icon;
+    public Sprite icon;
+    private bool placed;
 
-	public byte getOwner(){
-		return owner;
-	}
+    public byte getOwner()
+    {
+        return owner;
+    }
 
-	public void setOwner(byte owner){
-		this.owner = owner;
-	}
+    public void setOwner(byte owner)
+    {
+        this.owner = owner;
+    }
     public void Start()
     {
         buildingUi = GetComponentInChildren<BuildingUi>();
         buildingUi.gameObject.SetActive(false);
     }
-	// Update is called once per frame
-	void Update () {
-		updateBuilding ();
+    // Update is called once per frame
+    void Update()
+    {
+        if (placed)
+            updateBuilding();
 
-		if (Health <= 0) {
-			Die ();
-		}
-	}
+        if (Health <= 0)
+        {
+            Die();
+        }
+    }
 
-	void Die() {
-		Destroy (this.gameObject);
-	}
+    void Die()
+    {
+        Destroy(this.gameObject);
+    }
 
-	public abstract void updateBuilding();
+    public abstract void updateBuilding();
 
-	#region Interactable implementation
+    #region Interactable implementation
 
-	public virtual void Activate (UserInteraction interactor)
-	{
+    public virtual void Activate(UserInteraction interactor)
+    {
         //TODO  
         buildingUi.gameObject.SetActive(true);
-	}
+    }
 
     public virtual void Deactivate(UserInteraction interactor)
     {
@@ -52,9 +59,22 @@ public abstract class Building : MonoBehaviour,Interactable
     }
     #endregion
 
-    public void setTarget (WalkType newTarget)
-	{
-		target = newTarget;
-	}
-    
+    public void setTarget(WalkType newTarget)
+    {
+        target = newTarget;
+    }
+
+    public void Init()
+    {
+        GetComponent<Collider>().enabled = false;
+        placed = false;
+    }
+
+    public void Place()
+    {
+        GetComponent<Collider>().enabled = true;
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        placed = true;
+    }
+
 }
