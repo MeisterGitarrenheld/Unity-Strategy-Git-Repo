@@ -22,6 +22,10 @@ public class UserInteraction : MonoBehaviour {
     private Unit.UnitType doubleClickType;
     private int noType = 10000;
     private bool doubleClickSelect;
+    private GameObject ghostBuilding;
+    private bool placingBuilding;
+
+    public GameObject TestObject;
 
     void Start ()
     {
@@ -33,6 +37,25 @@ public class UserInteraction : MonoBehaviour {
 
 	void Update ()
     {
+
+        if (placingBuilding)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out hit, 1000, 1 << LayerMask.NameToLayer("Ground")))
+            {
+                ghostBuilding.transform.position = hit.point + Vector3.up * 3;
+            }
+
+            if (Input.GetMouseButtonUp(0))
+                EndBuilding();
+            else if (Input.GetMouseButtonUp(1))
+                AbortBuilding();
+
+            return;
+        }
+
+        if (Input.GetMouseButtonDown(2))
+            StartBuilding(TestObject);
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -225,6 +248,7 @@ public class UserInteraction : MonoBehaviour {
             user.ui.mouseIndicator.rectTransform.localPosition = new Vector2(-user.ui.Width * 2, 0);
         }
 
+        
         /* // Per Raycast Auswählen, nur eine Figur
         RaycastHit hit;
         if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out hit, 1000, 1 << LayerMask.NameToLayer("UserInteraction")))
@@ -278,6 +302,28 @@ public class UserInteraction : MonoBehaviour {
         todestroy.Clear();
     }
 
+    public void StartBuilding(GameObject building)
+    {
+        ghostBuilding = Instantiate(building);
+        ghostBuilding.GetComponent<Building>().Init();
+        placingBuilding = true;
+    }
 
+    void AbortBuilding()
+    {
+        if (ghostBuilding != null)
+        {
+            Destroy(ghostBuilding);
+            placingBuilding = false;
+        }
+    }
+
+    void EndBuilding()
+    {
+        ghostBuilding.GetComponent<Building>().Place();
+        gm.RegisterInteractable(ghostBuilding.transform, user.PlayerNum);
+        placingBuilding = false;
+        ghostBuilding = null;
+    }
 
 }

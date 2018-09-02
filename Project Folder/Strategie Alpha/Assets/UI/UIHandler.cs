@@ -33,33 +33,11 @@ public class UIHandler : MonoBehaviour {
 	}
 
 	public void showCollectorMenu(){
-		showMenu (Menu.COLLECTOR_BUILDING);
-	}
-	public void showFactoryMenu(){
-		showMenu (Menu.FACTORY_BUILDING);
-	}
-	public void showMainBuildingMenu(){
-		showMenu (Menu.MAIN_BUILDING);
-	}
-	private void showMenu(Menu menu) {
-		if (currentMenu.Equals (menu)) {
+		//Menü bereits sichtbar?
+		if (currentMenu.Equals (Menu.COLLECTOR_BUILDING)) {
 			return;
 		}
-		currentMenu = menu;
-		GameObject[] menuItems;
-		switch (menu) {
-		case Menu.COLLECTOR_BUILDING:
-			menuItems = buildings;
-			break;
-		case Menu.FACTORY_BUILDING:
-			menuItems = units;
-			break;
-		case Menu.MAIN_BUILDING:
-			menuItems = new GameObject[1];
-			menuItems [0] = units [0];
-			break;
-		}
-		foreach(GameObject building in menuItems){
+		foreach(GameObject building in buildings){
 			Sprite icon = building.GetComponent<Building>().icon;
 			GameObject button = Instantiate (buildingButton) as GameObject;
 			button.transform.SetParent (buildingList.transform);
@@ -67,6 +45,8 @@ public class UIHandler : MonoBehaviour {
 
 			button.GetComponent<Button> ().onClick.AddListener (() => clickBuildingButton(building));
 		}
+		//buildingButton.GetComponent<Button>().
+
 	}
 	public void clickUnitButton(GameObject build){
 		Debug.Log("Build: "+ build.GetComponent<Unit>().name);
@@ -80,8 +60,13 @@ public class UIHandler : MonoBehaviour {
 		if (currentMenu.Equals (Menu.NONE)) {
 			return;
 		}
-		currentMenu = Menu.NONE;
+		bool jumpFirst = false;
+		Debug.Log ("Delete!");
 		foreach (Transform t in buildingList.transform) {
+			if (!jumpFirst) {
+				jumpFirst = true;
+				continue;
+			}
 			Destroy (t.gameObject);
 		}
 

@@ -10,6 +10,7 @@ public abstract class Building : MonoBehaviour,Interactable
 	protected byte owner;
     protected BuildingUi buildingUi;
 	public Sprite icon;
+    private bool placed;
 
 	public byte getOwner(){
 		return owner;
@@ -25,7 +26,8 @@ public abstract class Building : MonoBehaviour,Interactable
     }
 	// Update is called once per frame
 	void Update () {
-		updateBuilding ();
+        if(placed)
+		    updateBuilding ();
 
 		if (Health <= 0) {
 			Die ();
@@ -40,13 +42,13 @@ public abstract class Building : MonoBehaviour,Interactable
 
 	#region Interactable implementation
 
-	public void Activate (UserInteraction interactor)
+	public virtual void Activate (UserInteraction interactor)
 	{
         //TODO  
         buildingUi.gameObject.SetActive(true);
 	}
 
-    public void Deactivate(UserInteraction interactor)
+    public virtual void Deactivate(UserInteraction interactor)
     {
         buildingUi.gameObject.SetActive(false);
     }
@@ -56,5 +58,18 @@ public abstract class Building : MonoBehaviour,Interactable
 	{
 		target = newTarget;
 	}
-    
+
+    public void Init()
+    {
+        GetComponent<Collider>().enabled = false;
+        placed = false;
+    }
+
+    public void Place()
+    {
+        GetComponent<Collider>().enabled = true;
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        placed = true;
+    }
+
 }
