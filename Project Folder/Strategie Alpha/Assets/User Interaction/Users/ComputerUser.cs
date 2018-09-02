@@ -26,7 +26,10 @@ public class ComputerUser : User
                 if (unit != null)
                     unit.setOwner(PlayerNum);
                 else if (build != null)
+                {
                     build.setOwner(PlayerNum);
+                    build.Place();
+                }
             }
             spawn = false;
         }
