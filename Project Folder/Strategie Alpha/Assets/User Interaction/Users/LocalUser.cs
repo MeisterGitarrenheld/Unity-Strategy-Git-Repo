@@ -10,11 +10,13 @@ public class LocalUser : User {
         foreach (Unit un in FindObjectsOfType<Unit>())
         {
             gm.RegisterInteractable(un.transform, PlayerNum);
+            un.setOwner(PlayerNum);
         }
 
         foreach (Building un in FindObjectsOfType<Building>())
         {
             gm.RegisterInteractable(un.transform, PlayerNum);
+            un.setOwner(PlayerNum);
             un.Place();
         }
 	}

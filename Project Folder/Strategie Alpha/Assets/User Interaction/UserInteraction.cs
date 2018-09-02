@@ -331,6 +331,7 @@ public class UserInteraction : MonoBehaviour
     void EndBuilding()
     {
         ghostBuilding.GetComponent<Building>().Place();
+        ghostBuilding.GetComponent<Building>().setOwner(user.PlayerNum);
         gm.RegisterInteractable(ghostBuilding.transform, user.PlayerNum);
         placingBuilding = false;
         ghostBuilding = null;

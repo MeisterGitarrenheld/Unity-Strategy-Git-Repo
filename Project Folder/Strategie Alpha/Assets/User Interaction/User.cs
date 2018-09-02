@@ -11,7 +11,7 @@ public enum UserType
 
 public class User : MonoBehaviour {
 
-    public byte PlayerNum { get; protected set; }
+    public byte PlayerNum;
     [HideInInspector]
     public UIHandler ui;
 
