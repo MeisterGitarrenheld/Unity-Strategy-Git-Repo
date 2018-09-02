@@ -41,6 +41,6 @@ public class CollectorUnit : Unit, HitInterface
 
     public void Hit(int damage)
     {
-
+        Health -= damage;
     }
 }
