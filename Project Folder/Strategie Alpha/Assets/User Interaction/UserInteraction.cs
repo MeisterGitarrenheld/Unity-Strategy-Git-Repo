@@ -265,10 +265,17 @@ public class UserInteraction : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out hit, 1000, 1 << LayerMask.NameToLayer("UserInteraction")))
         {
-            foreach (Transform t in activeInteractable)
+            var unit = hit.collider.gameObject.GetComponent<Unit>();
+            var build = hit.collider.gameObject.GetComponent<Building>();
+            if ((unit != null && unit.getOwner() != user.PlayerNum) ||
+                (build != null && build.getOwner() != user.PlayerNum))
             {
-                if (t != null && t.gameObject.activeInHierarchy)
-                    t.GetComponent<Interactable>().setTarget(new WalkType(hit.collider.transform));
+
+                foreach (Transform t in activeInteractable)
+                {
+                    if (t != null && t.gameObject.activeInHierarchy)
+                        t.GetComponent<Interactable>().setTarget(new WalkType(hit.collider.transform));
+                }
             }
         }
         else if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out hit, 1000, 1 << LayerMask.NameToLayer("Ground")))
