@@ -163,6 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 200
+  icon: {fileID: 0}
   factorySpeed: 1
   listOfUnits:
   - {fileID: 1012720102661232, guid: f2cec7e5fe4bde149ad734b773c28cc8, type: 2}
@@ -279,6 +280,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 100
+  icon: {fileID: 0}
 --- !u!65 &83353788
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1455,6 +1457,12 @@ Prefab:
       propertyPath: SelectMouseYBorder
       value: 0.25
       objectReference: {fileID: 0}
+    - target: {fileID: 114375312991172648, guid: 8a43b2a5cc6dc2a42a553d60d807b30b,
+        type: 2}
+      propertyPath: TestObject
+      value: 
+      objectReference: {fileID: 1551699610229282, guid: e0ce21f7536e76b4d81cdd8b2ea669af,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a43b2a5cc6dc2a42a553d60d807b30b, type: 2}
   m_IsPrefabAsset: 0
