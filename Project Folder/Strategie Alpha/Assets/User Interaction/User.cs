@@ -26,7 +26,10 @@ public class User : MonoBehaviour {
         foreach (Building un in FindObjectsOfType<Building>())
         {
             gm.RegisterInteractable(un.transform, PlayerNum);
+            un.Place();
         }
+
+
     }
 	
 
