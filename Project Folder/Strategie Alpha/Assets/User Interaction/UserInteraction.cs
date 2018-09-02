@@ -25,6 +25,8 @@ public class UserInteraction : MonoBehaviour
     private bool doubleClickSelect;
     private GameObject ghostBuilding;
     private bool placingBuilding;
+    private Vector3 oldBuildPos;
+    private bool placable;
 
     void Start()
     {
@@ -40,14 +42,21 @@ public class UserInteraction : MonoBehaviour
         if (placingBuilding)
         {
             RaycastHit hit;
-            if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out hit, 1000, 1 << LayerMask.NameToLayer("Ground")))
+            if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out hit, 1000, 1 << LayerMask.NameToLayer("UserInteraction")))
+            {
+                ghostBuilding.transform.position = oldBuildPos;
+                placable = false;
+            }
+            else if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out hit, 1000, 1 << LayerMask.NameToLayer("Ground")))
             {
                 ghostBuilding.transform.position = hit.point + Vector3.up * 3;
+                oldBuildPos = ghostBuilding.transform.position;
+                placable = true;
             }
 
 
             Vector3 mousePos = StartSelectPosition = cam.ScreenToViewportPoint(Input.mousePosition);
-            if (Input.GetMouseButtonUp(0) && mousePos.y > SelectMouseYBorder)
+            if (placable && Input.GetMouseButtonUp(0) && mousePos.y > SelectMouseYBorder)
                 EndBuilding();
             else if (Input.GetMouseButtonUp(1))
                 AbortBuilding();

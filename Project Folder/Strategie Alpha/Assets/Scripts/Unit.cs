@@ -55,7 +55,8 @@ public abstract class Unit : MonoBehaviour,Interactable {
 	void Die() {
         dead = true;
         GameMaster.Instance.UnRegisterInteractable(transform, owner);
-        GameMaster.Instance.Players[owner].uInteraction.activeInteractable.Remove(transform);
+        if (GameMaster.Instance.Players[owner].UType == UserType.Local)
+            GameMaster.Instance.Players[owner].uInteraction.activeInteractable.Remove(transform);
         Destroy (this.gameObject);
 	}
 
