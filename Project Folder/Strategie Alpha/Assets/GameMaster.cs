@@ -52,7 +52,7 @@ public class GameMaster : MonoBehaviour {
         return newNum;
     }
 
-    public void RegisterUI(UIHandler ui)
+    public User RegisterUI(UIHandler ui)
     {
         //Add Ui to first User without Ui
         foreach(User user in Players)
@@ -60,11 +60,12 @@ public class GameMaster : MonoBehaviour {
             if(user.ui == null)
             {
                 user.ui = ui;
-                return;
+                return user;
             }
         }
         //If no free user, then destroy
         Destroy(ui.gameObject);
+        return null;
     }
 
 }

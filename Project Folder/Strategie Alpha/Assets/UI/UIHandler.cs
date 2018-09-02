@@ -23,10 +23,11 @@ public class UIHandler : MonoBehaviour {
 	public GameObject buildingList;
 	public GameObject[] buildings;
 	public GameObject[] units;
+    private User user;
 
 	void Start () {
         gm = GameMaster.Instance;
-        gm.RegisterUI(this);
+        user = gm.RegisterUI(this);
         rectTrans = GetComponent<RectTransform>();
         Width = rectTrans.rect.width;
         Height = rectTrans.rect.height;
