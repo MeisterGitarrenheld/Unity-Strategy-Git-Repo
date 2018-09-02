@@ -46,7 +46,7 @@ public class UIHandler : MonoBehaviour {
 			return;
 		}
 		currentMenu = menu;
-		GameObject[] menuItems;
+		GameObject[] menuItems = new GameObject[0];
 		switch (menu) {
 		case Menu.COLLECTOR_BUILDING:
 			menuItems = buildings;
