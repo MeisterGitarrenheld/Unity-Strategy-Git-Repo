@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UserInteraction : MonoBehaviour {
+public class UserInteraction : MonoBehaviour
+{
 
     private GameMaster gm;
     private Camera cam;
@@ -22,17 +23,40 @@ public class UserInteraction : MonoBehaviour {
     private Unit.UnitType doubleClickType;
     private int noType = 10000;
     private bool doubleClickSelect;
+    private GameObject ghostBuilding;
+    private bool placingBuilding;
 
-    void Start ()
+    public GameObject TestObject;
+
+    void Start()
     {
         gm = GameMaster.Instance;
         cam = gm.MainCamera;
         activeInteractable = new List<Transform>();
         user = GetComponent<User>();
-	}
+    }
 
-	void Update ()
+    void Update()
     {
+
+        if (placingBuilding)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out hit, 1000, 1 << LayerMask.NameToLayer("Ground")))
+            {
+                ghostBuilding.transform.position = hit.point + Vector3.up * 3;
+            }
+
+            if (Input.GetMouseButtonUp(0))
+                EndBuilding();
+            else if (Input.GetMouseButtonUp(1))
+                AbortBuilding();
+
+            return;
+        }
+
+        if (Input.GetMouseButtonDown(2))
+            StartBuilding(TestObject);
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -60,7 +84,7 @@ public class UserInteraction : MonoBehaviour {
         if (DoubleclickTimer >= 0)
             DoubleclickTimer -= Time.deltaTime;
 
-	}
+    }
 
     void DoubleClickSelect()
     {
@@ -175,20 +199,20 @@ public class UserInteraction : MonoBehaviour {
         foreach (Transform t in gm.PlayerInteractable[user.PlayerNum])
         {
             Vector2 screenObject = cam.WorldToViewportPoint(t.position);
-            if(screenObject.x < UpperBox.x + 0.01 && screenObject.x > LowerBox.x - 0.01
+            if (screenObject.x < UpperBox.x + 0.01 && screenObject.x > LowerBox.x - 0.01
                 && screenObject.y < UpperBox.y + 0.01 && screenObject.y > LowerBox.y - 0.01)
             {
                 Unit unit;
                 if ((unit = t.GetComponent<Unit>()) != null && unit.getOwner() == user.PlayerNum)
                 {
-                    if(buildingSelect)
+                    if (buildingSelect)
                         activeInteractable.Clear();
                     if (unit.Type != Unit.UnitType.COLLECTOR_UNIT && collectorSelect)
                     {
                         activeInteractable.Clear();
                         collectorSelect = false;
                     }
-                    else if(unit.Type == Unit.UnitType.COLLECTOR_UNIT && !collectorSelect)
+                    else if (unit.Type == Unit.UnitType.COLLECTOR_UNIT && !collectorSelect)
                     {
                         continue;
                     }
@@ -196,7 +220,7 @@ public class UserInteraction : MonoBehaviour {
                     doubleClickType = unit.Type;
                     buildingSelect = false;
                 }
-                if(t.GetComponent<Building>() != null && activeInteractable.Count == 0)
+                if (t.GetComponent<Building>() != null && activeInteractable.Count == 0)
                 {
                     activeInteractable.Clear();
                     activeInteractable.Add(t);
@@ -206,7 +230,7 @@ public class UserInteraction : MonoBehaviour {
             }
         }
 
-        if(activeInteractable.Count == 1)
+        if (activeInteractable.Count == 1)
         {
             if (DoubleclickTimer <= 0)
                 DoubleclickTimer = 0.1f;
@@ -224,6 +248,7 @@ public class UserInteraction : MonoBehaviour {
             user.ui.selectedUnitText.text = selected;
             user.ui.mouseIndicator.rectTransform.localPosition = new Vector2(-user.ui.Width * 2, 0);
         }
+
 
         /* // Per Raycast Auswählen, nur eine Figur
         RaycastHit hit;
@@ -265,7 +290,7 @@ public class UserInteraction : MonoBehaviour {
     void CheckSelected()
     {
         List<Transform> todestroy = new List<Transform>();
-        foreach(Transform t in activeInteractable)
+        foreach (Transform t in activeInteractable)
         {
             if (t == null || !t.gameObject.activeInHierarchy)
             {
@@ -278,6 +303,31 @@ public class UserInteraction : MonoBehaviour {
         todestroy.Clear();
     }
 
+    public void StartBuilding(GameObject building)
+    {
+        ghostBuilding = Instantiate(building);
+        ghostBuilding.GetComponent<Building>().Init();
+        placingBuilding = true;
+    }
 
+    void AbortBuilding()
+    {
+        if (ghostBuilding != null)
+        {
+            Destroy(ghostBuilding);
+            placingBuilding = false;
+        }
+    }
+
+    void EndBuilding()
+    {
+        ghostBuilding.GetComponent<Building>().Place();
+        gm.RegisterInteractable(ghostBuilding.transform, user.PlayerNum);
+        placingBuilding = false;
+        ghostBuilding = null;
+    }
 
 }
+
+
+
