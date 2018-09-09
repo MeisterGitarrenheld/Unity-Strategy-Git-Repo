@@ -74,6 +74,7 @@ public abstract class Building : MonoBehaviour, Interactable
     public void Place()
     {
         GetComponent<Collider>().enabled = true;
+        GetComponent<Rigidbody>().constraints &= ~RigidbodyConstraints.FreezePositionY;
         GetComponent<Rigidbody>().velocity = Vector3.zero;
         placed = true;
     }

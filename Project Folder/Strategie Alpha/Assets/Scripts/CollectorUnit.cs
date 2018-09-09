@@ -4,9 +4,30 @@ using UnityEngine;
 
 public class CollectorUnit : Unit, HitInterface
 {
+    GameObject toBuild;
 
-	void buildBuilding(Building building){
+    public void SetBuildBuilding(GameObject building)
+    {
+        toBuild = building;
+    }
 
+    public void StopBuild()
+    {
+        if (toBuild != null)
+        {
+            GameMaster.Instance.UnRegisterInteractable(toBuild.transform, owner);
+            Destroy(toBuild);
+            toBuild = null;
+        }
+    }
+
+	public void buildBuilding(){
+        if(toBuild != null)
+        {
+            toBuild.GetComponent<Building>().Place();
+            print("Placed " + toBuild.name);
+            toBuild = null;
+        }
 	}
 
 	// Update is called once per frame
@@ -15,6 +36,17 @@ public class CollectorUnit : Unit, HitInterface
         if (target != null)
         {
             agent.SetDestination(target.getTargetPosition());
+            if (target.WType == WType.Build && Vector3.Distance(transform.position, target.getTargetPosition()) < 5)
+            {
+                buildBuilding();
+                print("Way to build");
+                target = null;
+                agent.SetDestination(transform.position);
+            }
+            else if(target.WType != WType.Build && toBuild != null)
+            {
+                StopBuild();
+            }
         }
 
     }
