@@ -427,6 +427,8 @@ MonoBehaviour:
   matchSize: 4
   isNetworkActive: 0
   matchMaker: {fileID: 0}
+  NetworkPlayer: {fileID: 0}
+  NetworkOpponent: {fileID: 0}
 --- !u!114 &421365189
 MonoBehaviour:
   m_ObjectHideFlags: 0
