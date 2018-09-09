@@ -20,6 +20,8 @@ public class User : NetworkBehaviour {
     public UserInteraction uInteraction { get; protected set; }
     public UserType UType { get; protected set; }
 
+    public int Resources { get; protected set; }
+
 	void Start ()
     {
         gm = GameMaster.Instance;
@@ -28,4 +30,17 @@ public class User : NetworkBehaviour {
     }
 
     protected virtual void Init() { }
+
+
+    public void IncreaseResources(int resInc)
+    {
+        Resources += resInc;
+    }
+    public bool DecreaseResources(int resDec)
+    {
+        if (resDec > Resources)
+            return false;
+        Resources -= resDec;
+        return true;
+    }
 }
