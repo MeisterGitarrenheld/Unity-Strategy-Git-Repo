@@ -469,6 +469,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 0}
+  resourceUI: {fileID: 0}
   InitSpawn:
   - {fileID: 1569068812183114, guid: c07699472f9ac024da786731eb9af42b, type: 2}
   - {fileID: 1012720102661232, guid: f2cec7e5fe4bde149ad734b773c28cc8, type: 2}
@@ -786,6 +787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 0}
+  resourceUI: {fileID: 1996944289}
   InitSpawn: []
 --- !u!4 &1317189187
 Transform:
