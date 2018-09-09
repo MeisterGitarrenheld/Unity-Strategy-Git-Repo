@@ -21,6 +21,6 @@ public class UnitUi : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if(ownUnit.target != null)
-            wayPoint.position = ownUnit.target.getTargetPosition();
+            wayPoint.position = ownUnit.agent.destination;
 	}
 }

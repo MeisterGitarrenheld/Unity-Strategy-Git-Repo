@@ -257,15 +257,6 @@ public class UserInteraction : MonoBehaviour
             user.ui.selectedUnitText.text = selected;
             user.ui.mouseIndicator.rectTransform.localPosition = new Vector2(-user.ui.Width * 2, 0);
         }
-
-
-        /* // Per Raycast Auswählen, nur eine Figur
-        RaycastHit hit;
-        if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out hit, 1000, 1 << LayerMask.NameToLayer("UserInteraction")))
-        {
-            print(hit.collider.name);
-        }
-        */
     }
 
     void MoveSelect()
