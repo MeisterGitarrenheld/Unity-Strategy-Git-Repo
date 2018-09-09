@@ -287,6 +287,13 @@ public class UserInteraction : MonoBehaviour
                 }
             }
         }
+        else if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out hit, 1000, 1 << LayerMask.NameToLayer("Resources")))
+        {
+            foreach(Transform t in activeInteractable)
+            {
+                t.GetComponent<Interactable>().setTarget(new WalkType(hit.collider.transform.position, WType.Collect));
+            }
+        }
         else if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out hit, 1000, 1 << LayerMask.NameToLayer("Ground")))
         {
             int squareSize = Mathf.CeilToInt(Mathf.Sqrt(activeInteractable.Count));
