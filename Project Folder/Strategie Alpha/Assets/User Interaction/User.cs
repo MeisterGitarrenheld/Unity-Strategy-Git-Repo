@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public enum UserType
 {
@@ -9,7 +10,7 @@ public enum UserType
     Computer
 }
 
-public class User : MonoBehaviour {
+public class User : NetworkBehaviour {
 
     public byte PlayerNum { get; protected set; }
     [HideInInspector]

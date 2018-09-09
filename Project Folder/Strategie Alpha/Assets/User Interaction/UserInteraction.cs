@@ -277,6 +277,16 @@ public class UserInteraction : MonoBehaviour
                         t.GetComponent<Interactable>().setTarget(new WalkType(hit.collider.transform));
                 }
             }
+            else if ((unit != null && unit.getOwner() == user.PlayerNum) ||
+                (build != null && build.getOwner() == user.PlayerNum))
+                {
+
+                    foreach (Transform t in activeInteractable)
+                    {
+                        if (t != null && t.gameObject.activeInHierarchy)
+                            t.GetComponent<Interactable>().setTarget(new WalkType(hit.collider.transform.position));
+                    }
+                }
         }
         else if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out hit, 1000, 1 << LayerMask.NameToLayer("Resources")))
         {
