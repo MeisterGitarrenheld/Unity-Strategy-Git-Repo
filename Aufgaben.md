@@ -1,9 +1,14 @@
 ### Aufgaben _(offen)_
-* gameMaster-Script (Mit Referenz auf Terrein)
-* Häuser Bauen       \
-* Einheiten bauen     > Baumenü erstellen
-* Einheiten greifen an
-* Einheitenmovement
+* Fehler beheben: Einheiten kann sich nicht mehr bewegen beim resourcen sammeln
+* Networking
+* Bauzeit von Gebäuden
+* Siegbedingung
+* Terrein Texturen (bissel gestalten)
+* Startresourcen
+* Abzug von Resourcen beim bauen
+* AutoAttack Radius
+* Simple KI
+* (Blender Tutorial)
 
 ### Aufgaben Tom
 * **NavMesh anschauen** (Status: Work in Progress)
