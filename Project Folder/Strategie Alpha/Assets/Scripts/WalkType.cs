@@ -4,7 +4,9 @@ using UnityEngine;
 public enum WType
 {
     Walk,
-    Attack
+    Attack,
+    Build,
+    Collect
 }
 
 public class WalkType
@@ -25,6 +27,12 @@ public class WalkType
         justMove = false;
         attackTarget = target;
         WType = WType.Attack;
+    }
+    public WalkType(Vector3 target, WType type)
+    {
+        WType = type;
+        justMove = true;
+        moveTarget = target;
     }
 
     public Vector3 getTargetPosition()
