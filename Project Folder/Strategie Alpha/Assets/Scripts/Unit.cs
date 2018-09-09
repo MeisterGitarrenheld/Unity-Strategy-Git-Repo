@@ -12,6 +12,9 @@ public abstract class Unit : MonoBehaviour,Interactable {
 		NONE
 	}
     protected byte owner;
+	public float timer = 0;
+	public int carryMax;
+	protected int carry;
     public float AttackRange;
     public int Damage;
 	public float AttackSpeed;
@@ -22,6 +25,7 @@ public abstract class Unit : MonoBehaviour,Interactable {
 	public WalkType target { get; protected set; }
     protected UnitUi unitUi;
     protected bool dead;
+	private GameObject collided = null;
 
 	public void setOwner(byte owner){
 		this.owner = owner;
@@ -45,6 +49,9 @@ public abstract class Unit : MonoBehaviour,Interactable {
 		if (Health <= 0) {
 			Die ();
 		}
+		if (collided != null) {
+			collectRessources ();
+		}
 		updateUnit ();
 	}
 
@@ -62,7 +69,19 @@ public abstract class Unit : MonoBehaviour,Interactable {
 
 	public abstract void attack();
 
-
+	void OnTriggerEnter(Collider collider){
+		if(collider.tag.Equals("Resource")) {
+			//Sammel Resourcen ein!
+			target = null;
+			collided = collider.gameObject;
+			collectRessources ();
+			agent.SetDestination(transform.position);
+		}
+		else if(collider.tag.Equals("MainBuilding")){
+			//Füge die Resourcen dem Lager hinzu
+		}
+		
+	}
 	#region Interactable implementation
 	public virtual void Activate (UserInteraction interactor)
 	{
@@ -77,5 +96,24 @@ public abstract class Unit : MonoBehaviour,Interactable {
     #endregion
 
     public abstract void updateUnit();
+
+	public void collectRessources(){
+		if (timer <= 0) {
+			timer = 1;
+			if (carry < carryMax) {
+				carry += 20;
+
+				if (carry > carryMax) {
+					collided.GetComponent<Resource> ().collectResources (carry - carryMax);
+					carry = carryMax;
+					collided = null;
+				} else {
+					collided.GetComponent<Resource> ().collectResources (20);
+				}
+
+			}
+		}
+		timer -= Time.deltaTime;
+	}
 
 }
