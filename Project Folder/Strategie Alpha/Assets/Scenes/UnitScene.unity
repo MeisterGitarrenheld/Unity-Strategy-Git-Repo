@@ -958,6 +958,42 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 1554498716922090, guid: 4e9835497adb2a04093bc4a028f05e42, type: 2}
+      propertyPath: m_TagString
+      value: Resource
+      objectReference: {fileID: 0}
+    - target: {fileID: 1741272978172512, guid: 4e9835497adb2a04093bc4a028f05e42, type: 2}
+      propertyPath: m_TagString
+      value: Resource
+      objectReference: {fileID: 0}
+    - target: {fileID: 1306240730873642, guid: 4e9835497adb2a04093bc4a028f05e42, type: 2}
+      propertyPath: m_TagString
+      value: Resource
+      objectReference: {fileID: 0}
+    - target: {fileID: 1760231941891316, guid: 4e9835497adb2a04093bc4a028f05e42, type: 2}
+      propertyPath: m_TagString
+      value: Resource
+      objectReference: {fileID: 0}
+    - target: {fileID: 1947145809629334, guid: 4e9835497adb2a04093bc4a028f05e42, type: 2}
+      propertyPath: m_TagString
+      value: Resource
+      objectReference: {fileID: 0}
+    - target: {fileID: 1612661921067742, guid: 4e9835497adb2a04093bc4a028f05e42, type: 2}
+      propertyPath: m_TagString
+      value: Resource
+      objectReference: {fileID: 0}
+    - target: {fileID: 1174406879805808, guid: 4e9835497adb2a04093bc4a028f05e42, type: 2}
+      propertyPath: m_TagString
+      value: Resource
+      objectReference: {fileID: 0}
+    - target: {fileID: 1269166304914076, guid: 4e9835497adb2a04093bc4a028f05e42, type: 2}
+      propertyPath: m_TagString
+      value: Resource
+      objectReference: {fileID: 0}
+    - target: {fileID: 1215628482434380, guid: 4e9835497adb2a04093bc4a028f05e42, type: 2}
+      propertyPath: m_TagString
+      value: Resource
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e9835497adb2a04093bc4a028f05e42, type: 2}
   m_IsPrefabAsset: 0
