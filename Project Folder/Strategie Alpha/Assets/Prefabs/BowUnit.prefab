@@ -384,6 +384,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e33d6de0101a884d923547d8ba4a5d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timer: 0
+  carryMax: 20
   AttackRange: 10
   Damage: 5
   AttackSpeed: 3
@@ -502,7 +504,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1774397342367182}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2

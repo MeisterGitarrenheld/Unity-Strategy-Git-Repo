@@ -258,7 +258,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1012720102661232}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -290,6 +290,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1ffe8f4955ae1143beb6c58826c40c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timer: 0
+  carryMax: 10
   AttackRange: 2
   Damage: 10
   AttackSpeed: 1
