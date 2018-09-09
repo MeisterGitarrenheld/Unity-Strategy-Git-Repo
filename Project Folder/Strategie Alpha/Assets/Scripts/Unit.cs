@@ -27,6 +27,8 @@ public abstract class Unit : MonoBehaviour,Interactable {
     protected bool dead;
 	private GameObject collided = null;
 
+	private WalkType saveTarget;
+
 	public void setOwner(byte owner){
 		this.owner = owner;
 	}
@@ -72,13 +74,17 @@ public abstract class Unit : MonoBehaviour,Interactable {
 	void OnTriggerEnter(Collider collider){
 		if(collider.tag.Equals("Resource")) {
 			//Sammel Resourcen ein!
-			target = null;
 			collided = collider.gameObject;
 			collectRessources ();
 			agent.SetDestination(transform.position);
 		}
 		else if(collider.tag.Equals("MainBuilding")){
 			//Füge die Resourcen dem Lager hinzu
+			GameMaster gm = GameMaster.Instance;
+			User user = gm.Players [owner];
+			user.IncreaseResources (carry);
+			carry = 0;
+			target = saveTarget;
 		}
 		
 	}
@@ -98,15 +104,39 @@ public abstract class Unit : MonoBehaviour,Interactable {
     public abstract void updateUnit();
 
 	public void collectRessources(){
+		agent.isStopped = true;
 		if (timer <= 0) {
 			timer = 1;
 			if (carry < carryMax) {
 				carry += 20;
-
 				if (carry > carryMax) {
 					collided.GetComponent<Resource> ().collectResources (carry - carryMax);
 					carry = carryMax;
 					collided = null;
+					GameMaster gm = GameMaster.Instance;
+					List<Transform> interact = new List<Transform> ();
+					gm.PlayerInteractable.TryGetValue (owner,out interact);
+					Transform closest = null;
+					float minDist = float.MaxValue;
+					foreach (Transform t in interact) {
+						if (t.tag.Equals ("MainBuilding")) {
+							float dist = Vector3.Distance (t.position, transform.position);
+							if (closest == null) {
+								closest = t;
+								minDist = dist;
+								continue;
+							}
+							if (minDist > dist) {
+								closest = t;
+								minDist = dist;
+							}
+						}
+					}
+					Debug.Log ("To MainBuilding!");
+					saveTarget = target;
+					target = new WalkType (closest.position);
+					agent.isStopped = false;
+
 				} else {
 					collided.GetComponent<Resource> ().collectResources (20);
 				}
