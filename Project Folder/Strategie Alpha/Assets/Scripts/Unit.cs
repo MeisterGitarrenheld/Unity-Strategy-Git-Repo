@@ -132,7 +132,6 @@ public abstract class Unit : MonoBehaviour,Interactable {
 							}
 						}
 					}
-					Debug.Log ("To MainBuilding!");
 					saveTarget = target;
 					target = new WalkType (closest.position);
 					agent.isStopped = false;

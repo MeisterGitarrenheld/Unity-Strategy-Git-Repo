@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Networking;
 
 public enum UserType
@@ -21,6 +22,7 @@ public class User : NetworkBehaviour {
     public UserType UType { get; protected set; }
 
     public int Resources { get; protected set; }
+	public GameObject resourceUI;
 
 	void Start ()
     {
@@ -35,12 +37,14 @@ public class User : NetworkBehaviour {
     public void IncreaseResources(int resInc)
     {
         Resources += resInc;
+		resourceUI.GetComponent<Text> ().text = Resources.ToString();
     }
     public bool DecreaseResources(int resDec)
     {
         if (resDec > Resources)
             return false;
         Resources -= resDec;
+		resourceUI.GetComponent<Text> ().text = Resources.ToString();
         return true;
     }
 }
