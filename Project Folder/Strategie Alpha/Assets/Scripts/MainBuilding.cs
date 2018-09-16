@@ -54,7 +54,11 @@ public class MainBuilding : Building, HitInterface
 		}
 	}
 	public void addToList(Unit.UnitType type) {
-		buildOrder.Add (type);
+		GameMaster gm = GameMaster.Instance;
+		User user = gm.Players [owner];
+		if (user.DecreaseResources (listOfUnits [(int)type].GetComponent<Unit> ().cost)) {			
+			buildOrder.Add (type);
+		}
 	}
 
 	override
