@@ -386,6 +386,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: 0
   carryMax: 20
+  cost: 150
   AttackRange: 10
   Damage: 5
   AttackSpeed: 3

@@ -503,6 +503,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 200
+  costs: 300
   icon: {fileID: 21300000, guid: 4539d77a47e18b34086e269c90388f92, type: 3}
   factorySpeed: 1
   listOfUnits:
