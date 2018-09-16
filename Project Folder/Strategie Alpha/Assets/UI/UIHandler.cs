@@ -98,6 +98,7 @@ public class UIHandler : MonoBehaviour {
 		GameObject selected = user.uInteraction.activeInteractable [0].gameObject;
 		if(currentMenu.Equals(Menu.FACTORY_BUILDING)){
 			selected.GetComponent<FactoryBuilding>().addToList(build.GetComponent<Unit>().getType());
+
 		}
 		else{
 			selected.GetComponent<MainBuilding>().addToList(build.GetComponent<Unit>().getType());
@@ -110,6 +111,13 @@ public class UIHandler : MonoBehaviour {
 		//Display "Ghost Building" to place it
 		//Debug.Log("Build: "+ build.GetComponent<Building>().name);
         user.uInteraction.StartBuilding(build);
+		if (build.GetComponent<FactoryBuilding> () != null) {
+			Debug.Log(build.GetComponent<FactoryBuilding> ().costs);
+			user.DecreaseResources (build.GetComponent<FactoryBuilding> ().costs);
+		} else {
+			Debug.Log(build.GetComponent<MainBuilding> ().costs);
+			user.DecreaseResources (build.GetComponent<MainBuilding> ().costs);
+		}
 	}
 	public void showNoneMenu(){
 		//Menü bereits sichtbar?

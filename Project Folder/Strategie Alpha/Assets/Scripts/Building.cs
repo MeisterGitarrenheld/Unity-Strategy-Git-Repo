@@ -9,6 +9,7 @@ public abstract class Building : MonoBehaviour, Interactable
     public WalkType target { get; protected set; }
     protected byte owner;
     protected BuildingUi buildingUi;
+	public int costs;
     public Sprite icon;
     private bool placed;
 

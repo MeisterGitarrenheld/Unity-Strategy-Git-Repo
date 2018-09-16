@@ -25,7 +25,6 @@ public class CollectorUnit : Unit, HitInterface
         if(toBuild != null)
         {
             toBuild.GetComponent<Building>().Place();
-            print("Placed " + toBuild.name);
             toBuild = null;
         }
 	}
@@ -39,7 +38,6 @@ public class CollectorUnit : Unit, HitInterface
             if (target.WType == WType.Build && Vector3.Distance(transform.position, target.getTargetPosition()) < 5)
             {
                 buildBuilding();
-                print("Way to build");
                 target = null;
                 agent.SetDestination(transform.position);
             }
