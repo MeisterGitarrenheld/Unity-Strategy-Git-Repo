@@ -14,7 +14,7 @@ public abstract class Unit : MonoBehaviour,Interactable {
     protected byte owner;
 	public float timer = 0;
 	public int carryMax;
-	protected int carry;
+	public int carry { get; protected set; }
     public float AttackRange;
     public int Damage;
 	public float AttackSpeed;
