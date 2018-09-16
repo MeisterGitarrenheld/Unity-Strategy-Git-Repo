@@ -587,6 +587,10 @@ Prefab:
       propertyPath: m_Name
       value: ResourceField Comp
       objectReference: {fileID: 0}
+    - target: {fileID: 1790110154299328, guid: 4e9835497adb2a04093bc4a028f05e42, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e9835497adb2a04093bc4a028f05e42, type: 2}
   m_IsPrefabAsset: 0
@@ -776,8 +780,8 @@ MonoBehaviour:
     type: 2}
   FactoryBuilding: {fileID: 1551699610229282, guid: e0ce21f7536e76b4d81cdd8b2ea669af,
     type: 2}
-  MaxCollector: 10
-  MaxAttack: 5
+  MaxCollector: 20
+  MaxAttack: 1
 --- !u!114 &1198157591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -892,17 +896,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4681571094992188, guid: fd7d3e2265fed4048ae0ec627e1869d4, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224760088561877926, guid: fd7d3e2265fed4048ae0ec627e1869d4,
         type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 224346808244812868, guid: fd7d3e2265fed4048ae0ec627e1869d4,
         type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224980399206530474, guid: fd7d3e2265fed4048ae0ec627e1869d4,
         type: 2}

@@ -93,7 +93,7 @@ public abstract class Unit : MonoBehaviour,Interactable {
 			collectRessources (collided);
 			agent.SetDestination(transform.position);
 		}
-        else if (target != null && target.WType == WType.ReturnResources && carry > 0 && collider.tag.Equals("MainBuilding"))
+        else if (target != null && target.WType == WType.ReturnResources && carry > 0 && collider.tag.Equals("MainBuilding") && collider.GetComponent<MainBuilding>().getOwner() == owner)
         {
             //Füge die Resourcen dem Lager hinzu
             User user = GameMaster.Instance.Players[owner];

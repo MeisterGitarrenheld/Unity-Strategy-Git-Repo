@@ -92,7 +92,7 @@ public class SimpleKI : MonoBehaviour {
             if (cu.target == null)
             {
                 GameObject res = GameObject.Find("ResourceField Comp");
-                if (res == null)
+                if (res == null || res.transform.childCount <= 0)
                 {
                     var reses = GameObject.FindGameObjectsWithTag("Resource");
                     res = reses[Random.Range(0, reses.Length)].transform.parent.gameObject;
