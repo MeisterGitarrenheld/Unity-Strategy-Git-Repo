@@ -53,7 +53,7 @@ public class SimpleKI : MonoBehaviour {
 
         if (!buildFactory && colUnits.Count > 0 && ownUser.Resources > 300 && factoryBuildings.Count <= 0)
         {
-            GameObject building = Instantiate(FactoryBuilding, colUnits[0].transform.position + Vector3.up * 3, colUnits[0].transform.rotation);
+            GameObject building = Instantiate(FactoryBuilding, mainBuildings[0].transform.position + Vector3.right * 5 + Vector3.up * 3, colUnits[0].transform.rotation);
             building.GetComponent<Rigidbody>().constraints |= RigidbodyConstraints.FreezePositionY;
             building.GetComponent<Building>().setOwner(ownUser.PlayerNum);
             gm.RegisterInteractable(building.transform, ownUser.PlayerNum);
@@ -62,11 +62,17 @@ public class SimpleKI : MonoBehaviour {
             colUnits[0].GetComponent<CollectorUnit>().SetBuildBuilding(building);
         }
         
+        if(factoryBuildings.Count > 0 && attackUnits.Count < 5)
+        {
+            factoryBuildings[0].setTarget(new WalkType(factoryBuildings[0].transform.position + Vector3.right * 3 + Vector3.forward * 5));
+            factoryBuildings[0].addToList((Unit.UnitType)Random.Range(1, 3));
+        }
+
         foreach(CollectorUnit cu in colUnits)
         {
             if(cu.target == null)
             {
-                cu.setTarget(new WalkType(GameObject.Find("ResourceField").transform.GetChild(0).position, WType.Collect));
+                cu.setTarget(new WalkType(GameObject.Find("ResourceField Comp").transform.GetChild(Random.Range(0, 4)).position, WType.Collect));
             }
         }
 

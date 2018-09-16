@@ -62,7 +62,7 @@ public abstract class Unit : MonoBehaviour,Interactable {
 		return Type;
 	}
 
-	void Die() {
+	protected virtual void Die() {
         dead = true;
         GameMaster.Instance.UnRegisterInteractable(transform, owner);
         if (GameMaster.Instance.Players[owner].UType == UserType.Local)

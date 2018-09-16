@@ -20,7 +20,8 @@ public class BowUnit : Unit, HitInterface
                 if (Vector3.Distance(transform.position, target.getTargetPosition()) > AttackRange)
                 {
                     agent.isStopped = false;
-                    agent.SetDestination(target.getTargetPosition());
+                    if (agent.isOnNavMesh)
+                        agent.SetDestination(target.getTargetPosition());
                 }
                 else
                 {
@@ -31,12 +32,14 @@ public class BowUnit : Unit, HitInterface
             else if (target.WType == WType.Walk && Vector3.Distance(transform.position, target.getTargetPosition()) > 1)
             {
                 agent.isStopped = false;
-                agent.SetDestination(target.getTargetPosition());
+                if (agent.isOnNavMesh)
+                    agent.SetDestination(target.getTargetPosition());
             }
             else if (target.WType == WType.Collect)
             {
                 agent.isStopped = false;
-                agent.SetDestination(target.getTargetPosition());
+                if (agent.isOnNavMesh)
+                    agent.SetDestination(target.getTargetPosition());
             }
             else
             {

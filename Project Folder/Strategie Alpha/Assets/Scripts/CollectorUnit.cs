@@ -34,12 +34,14 @@ public class CollectorUnit : Unit, HitInterface
 	public void updateUnit() {
         if (target != null)
         {
-            agent.SetDestination(target.getTargetPosition());
+            if(agent.isOnNavMesh)
+                agent.SetDestination(target.getTargetPosition());
             if (target.WType == WType.Build && Vector3.Distance(transform.position, target.getTargetPosition()) < 5)
             {
                 buildBuilding();
                 target = null;
-                agent.SetDestination(transform.position);
+                if (agent.isOnNavMesh)
+                    agent.SetDestination(transform.position);
             }
             else if(target.WType != WType.Build && toBuild != null)
             {
@@ -72,5 +74,15 @@ public class CollectorUnit : Unit, HitInterface
     public void Hit(int damage)
     {
         Health -= damage;
+    }
+
+    protected override void Die()
+    {
+        dead = true;
+        GameMaster.Instance.UnRegisterInteractable(transform, owner);
+        if (GameMaster.Instance.Players[owner].UType == UserType.Local)
+            GameMaster.Instance.Players[owner].uInteraction.activeInteractable.Remove(transform);
+        StopBuild();
+        Destroy(this.gameObject);
     }
 }

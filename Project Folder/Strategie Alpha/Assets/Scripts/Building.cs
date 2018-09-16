@@ -40,8 +40,11 @@ public abstract class Building : MonoBehaviour, Interactable
         }
     }
 
-    void Die()
+    protected virtual void Die()
     {
+        GameMaster.Instance.UnRegisterInteractable(transform, owner);
+        if (GameMaster.Instance.Players[owner].UType == UserType.Local)
+            GameMaster.Instance.Players[owner].uInteraction.activeInteractable.Remove(transform);
         Destroy(this.gameObject);
     }
 
