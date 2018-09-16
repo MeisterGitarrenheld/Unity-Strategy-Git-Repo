@@ -347,14 +347,16 @@ public class UserInteraction : MonoBehaviour
 
     void EndBuilding()
     {
-        ghostBuilding.GetComponent<Rigidbody>().constraints |= RigidbodyConstraints.FreezePositionY;
-        ghostBuilding.GetComponent<Building>().setOwner(user.PlayerNum);
-        gm.RegisterInteractable(ghostBuilding.transform, user.PlayerNum);
-        activeInteractable[0].GetComponent<CollectorUnit>().StopBuild();
-        activeInteractable[0].GetComponent<Interactable>().setTarget(new WalkType(ghostBuilding.transform.position, WType.Build));
-        activeInteractable[0].GetComponent<CollectorUnit>().SetBuildBuilding(ghostBuilding);
-        placingBuilding = false;
-        ghostBuilding = null;
+		if (user.DecreaseResources (ghostBuilding.GetComponent<Building> ().costs)) {
+      		ghostBuilding.GetComponent<Rigidbody>().constraints |= RigidbodyConstraints.FreezePositionY;
+      		ghostBuilding.GetComponent<Building>().setOwner(user.PlayerNum);
+			gm.RegisterInteractable (ghostBuilding.transform, user.PlayerNum);
+			activeInteractable [0].GetComponent<CollectorUnit> ().StopBuild ();
+			activeInteractable [0].GetComponent<Interactable> ().setTarget (new WalkType (ghostBuilding.transform.position, WType.Build));
+			activeInteractable [0].GetComponent<CollectorUnit> ().SetBuildBuilding (ghostBuilding);	
+      		placingBuilding = false;
+      	  	ghostBuilding = null;
+		}
     }
 
 }

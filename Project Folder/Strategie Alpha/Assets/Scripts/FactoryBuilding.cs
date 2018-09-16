@@ -49,6 +49,9 @@ public class FactoryBuilding : Building, HitInterface
 	}
 	public void addToList(Unit.UnitType type) {
 		buildOrder.Add (type);
+		GameMaster gm = GameMaster.Instance;
+		User user = gm.Players [owner];
+		user.DecreaseResources (listOfUnits [(int)type].GetComponent<Unit> ().cost);
 	}
     public void Hit(int damage)
     {

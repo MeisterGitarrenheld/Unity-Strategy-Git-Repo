@@ -21,13 +21,14 @@ public class User : MonoBehaviour {
     public UserInteraction uInteraction { get; protected set; }
     public UserType UType { get; protected set; }
 
-    public int Resources { get; protected set; }
+	public int Resources { get; protected set; }
 	public GameObject resourceUI;
 
 	void Start ()
     {
         gm = GameMaster.Instance;
         PlayerNum = gm.RegisterPlayer(this);
+		IncreaseResources (100);
         Init();
     }
 
