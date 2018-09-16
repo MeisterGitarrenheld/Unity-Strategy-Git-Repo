@@ -31,6 +31,7 @@ public class ComputerUser : User
                     build.Place();
                 }
             }
+            IncreaseResources(100);
             spawn = false;
         }
     }

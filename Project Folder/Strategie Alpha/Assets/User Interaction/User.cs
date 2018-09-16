@@ -28,7 +28,6 @@ public class User : MonoBehaviour {
     {
         gm = GameMaster.Instance;
         PlayerNum = gm.RegisterPlayer(this);
-		IncreaseResources (100);
         Init();
     }
 

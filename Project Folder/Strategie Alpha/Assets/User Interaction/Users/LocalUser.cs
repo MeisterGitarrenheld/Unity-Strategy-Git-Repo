@@ -21,6 +21,7 @@ public class LocalUser : User {
             un.setOwner(PlayerNum);
             un.Place();
         }
+        IncreaseResources(100);
         spawn = true;
 	}
 	
