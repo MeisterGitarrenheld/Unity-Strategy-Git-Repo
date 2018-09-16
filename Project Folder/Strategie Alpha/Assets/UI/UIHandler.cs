@@ -111,13 +111,6 @@ public class UIHandler : MonoBehaviour {
 		//Display "Ghost Building" to place it
 		//Debug.Log("Build: "+ build.GetComponent<Building>().name);
         user.uInteraction.StartBuilding(build);
-		if (build.GetComponent<FactoryBuilding> () != null) {
-			Debug.Log(build.GetComponent<FactoryBuilding> ().costs);
-			user.DecreaseResources (build.GetComponent<FactoryBuilding> ().costs);
-		} else {
-			Debug.Log(build.GetComponent<MainBuilding> ().costs);
-			user.DecreaseResources (build.GetComponent<MainBuilding> ().costs);
-		}
 	}
 	public void showNoneMenu(){
 		//Menü bereits sichtbar?
