@@ -16,6 +16,11 @@ public class MainBuilding : Building, HitInterface
 		Health -= damage;
     }
 
+    public List<Unit.UnitType> getBO()
+    {
+        return new List<Unit.UnitType>(buildOrder);
+    }
+
     // Update is called once per frame
     override
 	public void updateBuilding () {
