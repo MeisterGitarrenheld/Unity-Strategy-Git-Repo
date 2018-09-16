@@ -9,10 +9,12 @@ public class SimpleKI : MonoBehaviour {
 
     public GameObject MainBuilding;
     public GameObject FactoryBuilding;
-    
 
-	// Use this for initialization
-	void Start () {
+    public int MaxCollector = 10;
+    public int MaxAttack = 5;
+
+    // Use this for initialization
+    void Start () {
         gm = GameMaster.Instance;
         ownUser = GetComponent<ComputerUser>();
 	}
@@ -58,13 +60,13 @@ public class SimpleKI : MonoBehaviour {
             colUnits[0].GetComponent<CollectorUnit>().SetBuildBuilding(building);
         }
 
-        if (mainBuildings.Count > 0 && colUnits.Count < 3 && ownUser.Resources > 20 && mainBuildings.Count > 0)
+        if (mainBuildings.Count > 0 && colUnits.Count < MaxCollector && ownUser.Resources > 20 && mainBuildings.Count > 0)
         {
             int buildUnits = 0;
             foreach (Unit.UnitType uty in mainBuildings[0].getBO())
                 if (uty == Unit.UnitType.COLLECTOR_UNIT)
                     buildUnits++;
-            if (colUnits.Count + buildUnits < 5)
+            if (colUnits.Count + buildUnits < MaxCollector)
                 mainBuildings[0].addToList(Unit.UnitType.COLLECTOR_UNIT);
         }
 
@@ -79,7 +81,7 @@ public class SimpleKI : MonoBehaviour {
             colUnits[0].GetComponent<CollectorUnit>().SetBuildBuilding(building);
         }
 
-        if (factoryBuildings.Count > 0 && attackUnits.Count < 5)
+        if (factoryBuildings.Count > 0 && attackUnits.Count < MaxAttack)
         {
             factoryBuildings[0].setTarget(new WalkType(factoryBuildings[0].transform.position + Vector3.right * 3 + Vector3.forward * 5));
             factoryBuildings[0].addToList((Unit.UnitType)Random.Range(1, 3));
@@ -90,6 +92,11 @@ public class SimpleKI : MonoBehaviour {
             if (cu.target == null)
             {
                 GameObject res = GameObject.Find("ResourceField Comp");
+                if (res == null)
+                {
+                    var reses = GameObject.FindGameObjectsWithTag("Resource");
+                    res = reses[Random.Range(0, reses.Length)].transform.parent.gameObject;
+                }
                 if (res != null && res.transform.childCount > 0)
                     cu.setTarget(new WalkType(res.transform.GetChild(Random.Range(0, res.transform.childCount)).position, WType.Collect));
             }

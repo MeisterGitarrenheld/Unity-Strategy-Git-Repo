@@ -6,10 +6,11 @@ public class Resource : MonoBehaviour {
 
 	public int resourceCount;
 
-	public void collectResources(int ammount){
+	public bool collectResources(int ammount){
 		resourceCount -= ammount;
 		if (resourceCount <= 0) {
 			Destroy (this.gameObject);
 		}
+        return resourceCount <= 0;
 	}
 }

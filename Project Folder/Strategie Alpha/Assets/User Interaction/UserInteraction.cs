@@ -274,7 +274,12 @@ public class UserInteraction : MonoBehaviour
                 foreach (Transform t in activeInteractable)
                 {
                     if (t != null && t.gameObject.activeInHierarchy)
-                        t.GetComponent<Interactable>().setTarget(new WalkType(hit.collider.transform));
+                    {
+                        if (build != null && build.GetComponent<MainBuilding>() != null)
+                            t.GetComponent<Interactable>().setTarget(new WalkType(hit.collider.transform.position, WType.ReturnResources));
+                        else
+                            t.GetComponent<Interactable>().setTarget(new WalkType(hit.collider.transform));
+                    }
                 }
             }
             else if ((unit != null && unit.getOwner() == user.PlayerNum) ||

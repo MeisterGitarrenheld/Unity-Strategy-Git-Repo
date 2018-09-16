@@ -776,6 +776,8 @@ MonoBehaviour:
     type: 2}
   FactoryBuilding: {fileID: 1551699610229282, guid: e0ce21f7536e76b4d81cdd8b2ea669af,
     type: 2}
+  MaxCollector: 10
+  MaxAttack: 5
 --- !u!114 &1198157591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -887,6 +889,25 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4681571094992188, guid: fd7d3e2265fed4048ae0ec627e1869d4, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224760088561877926, guid: fd7d3e2265fed4048ae0ec627e1869d4,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 224346808244812868, guid: fd7d3e2265fed4048ae0ec627e1869d4,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 224980399206530474, guid: fd7d3e2265fed4048ae0ec627e1869d4,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd7d3e2265fed4048ae0ec627e1869d4, type: 2}

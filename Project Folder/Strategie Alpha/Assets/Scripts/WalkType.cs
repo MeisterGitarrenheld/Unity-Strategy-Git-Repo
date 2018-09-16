@@ -6,7 +6,8 @@ public enum WType
     Walk,
     Attack,
     Build,
-    Collect
+    Collect,
+    ReturnResources
 }
 
 public class WalkType

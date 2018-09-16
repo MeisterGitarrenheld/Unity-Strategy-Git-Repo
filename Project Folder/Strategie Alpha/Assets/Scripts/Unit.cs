@@ -30,6 +30,8 @@ public abstract class Unit : MonoBehaviour,Interactable {
 
 	private WalkType saveTarget;
 
+    public string TargetType;
+
 	public void setOwner(byte owner){
 		this.owner = owner;
 	}
@@ -49,15 +51,25 @@ public abstract class Unit : MonoBehaviour,Interactable {
     }
 
     // Update is called once per frame
-    void Update () {
-		if (Health <= 0) {
-			Die ();
-		}
-		if (collided != null) {
-			collectRessources ();
-		}
-		updateUnit ();
-	}
+    void Update()
+    {
+        if (Health <= 0)
+        {
+            Die();
+        }
+        updateUnit();
+
+        if (target != null && target.WType == WType.Collect)
+        {
+            if (collided == null)
+            {
+                agent.isStopped = false;
+                if (Vector3.Distance(transform.position, target.getTargetPosition()) < 1.5f)
+                    target = null;
+            }
+        }
+        TargetType = target == null ? "" : target.WType.ToString();
+    }
 
 	public UnitType getType(){
 		return Type;
@@ -72,19 +84,16 @@ public abstract class Unit : MonoBehaviour,Interactable {
 	}
 
 	public abstract void attack();
-
-	void OnTriggerEnter(Collider collider){
-		if(collider.tag.Equals("Resource")) {
-			//Sammel Resourcen ein!
-			collided = collider.gameObject;
-			collectRessources ();
-			agent.SetDestination(transform.position);
-		}
-		
-	}
+    
     void OnTriggerStay(Collider collider)
     {
-        if (carry > 0 && collider.tag.Equals("MainBuilding"))
+		if(target != null && target.WType == WType.Collect && collider.tag.Equals("Resource")) {
+			//Sammel Resourcen ein!
+			collided = collider.gameObject;
+			collectRessources (collided);
+			agent.SetDestination(transform.position);
+		}
+        else if (target != null && target.WType == WType.ReturnResources && carry > 0 && collider.tag.Equals("MainBuilding"))
         {
             //Füge die Resourcen dem Lager hinzu
             User user = GameMaster.Instance.Players[owner];
@@ -109,15 +118,16 @@ public abstract class Unit : MonoBehaviour,Interactable {
 
     public abstract void updateUnit();
 
-	public void collectRessources(){
+	public void collectRessources(GameObject collided){
         if(target != null && target.WType == WType.Collect)
             agent.isStopped = true;
 		if (timer <= 0) {
 			timer = 1;
 			if (carry < carryMax) {
+                bool empty = false;
 				carry += 20;
-				if (carry > carryMax) {
-					collided.GetComponent<Resource> ().collectResources (carry - carryMax);
+                empty = collided.GetComponent<Resource>().collectResources(20 < carry - carryMax ? carry - carryMax : 20);
+				if (carry > carryMax || empty) {
 					carry = carryMax;
 					collided = null;
 					GameMaster gm = GameMaster.Instance;
@@ -139,14 +149,11 @@ public abstract class Unit : MonoBehaviour,Interactable {
 							}
 						}
 					}
-					saveTarget = target;
-					target = new WalkType (closest.position);
+                    saveTarget = empty ? new WalkType(transform.position) : target;
+					target = new WalkType (closest.position, WType.ReturnResources);
 					agent.isStopped = false;
 
-				} else {
-					collided.GetComponent<Resource> ().collectResources (20);
 				}
-
 			}
 		}
 		timer -= Time.deltaTime;
