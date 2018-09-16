@@ -34,4 +34,17 @@ public class ComputerUser : User
             spawn = false;
         }
     }
+
+    public new void IncreaseResources(int resInc)
+    {
+        Resources += resInc;
+    }
+    public new bool DecreaseResources(int resDec)
+    {
+        if (resDec > Resources)
+            return false;
+        Resources -= resDec;
+        return true;
+    }
+
 }

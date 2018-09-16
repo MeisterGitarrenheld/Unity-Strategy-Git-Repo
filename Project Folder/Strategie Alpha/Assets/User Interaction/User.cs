@@ -11,7 +11,7 @@ public enum UserType
     Computer
 }
 
-public class User : NetworkBehaviour {
+public class User : MonoBehaviour {
 
     public byte PlayerNum { get; protected set; }
     [HideInInspector]

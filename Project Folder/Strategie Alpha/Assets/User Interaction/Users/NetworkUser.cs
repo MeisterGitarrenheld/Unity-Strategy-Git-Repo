@@ -12,7 +12,7 @@ public class NetworkUser : User
 
     protected override void Init()
     {
-        if (!isLocalPlayer)
+        if (true)
         {
             enabled = false;
             return;
