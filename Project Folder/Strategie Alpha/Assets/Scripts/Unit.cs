@@ -38,6 +38,7 @@ public abstract class Unit : MonoBehaviour,Interactable {
 	}
 
 	public void setTarget(WalkType newTarget){
+        agent.isStopped = false;
 		this.target = newTarget;
 	}
 
@@ -79,18 +80,22 @@ public abstract class Unit : MonoBehaviour,Interactable {
 			collectRessources ();
 			agent.SetDestination(transform.position);
 		}
-		else if(collider.tag.Equals("MainBuilding")){
-			//Füge die Resourcen dem Lager hinzu
-			GameMaster gm = GameMaster.Instance;
-			User user = gm.Players [owner];
-			user.IncreaseResources (carry);
-			carry = 0;
-			target = saveTarget;
-		}
 		
 	}
-	#region Interactable implementation
-	public virtual void Activate (UserInteraction interactor)
+    void OnTriggerStay(Collider collider)
+    {
+        if (carry > 0 && collider.tag.Equals("MainBuilding"))
+        {
+            //Füge die Resourcen dem Lager hinzu
+            User user = GameMaster.Instance.Players[owner];
+            user.IncreaseResources(carry);
+            carry = 0;
+            target = saveTarget;
+        }
+
+    }
+    #region Interactable implementation
+    public virtual void Activate (UserInteraction interactor)
 	{
         //TODO
         unitUi.gameObject.SetActive(true);
@@ -105,7 +110,8 @@ public abstract class Unit : MonoBehaviour,Interactable {
     public abstract void updateUnit();
 
 	public void collectRessources(){
-		agent.isStopped = true;
+        if(target != null && target.WType == WType.Collect)
+            agent.isStopped = true;
 		if (timer <= 0) {
 			timer = 1;
 			if (carry < carryMax) {
