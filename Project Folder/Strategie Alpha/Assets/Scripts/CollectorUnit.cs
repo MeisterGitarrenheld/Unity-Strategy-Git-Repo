@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CollectorUnit : Unit, HitInterface
 {
-    GameObject toBuild;
+    public GameObject toBuild { get; private set; }
 
     public void SetBuildBuilding(GameObject building)
     {

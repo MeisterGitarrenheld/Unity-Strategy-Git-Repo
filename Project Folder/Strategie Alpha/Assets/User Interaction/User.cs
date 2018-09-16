@@ -37,14 +37,16 @@ public class User : MonoBehaviour {
     public void IncreaseResources(int resInc)
     {
         Resources += resInc;
-		resourceUI.GetComponent<Text> ().text = Resources.ToString();
+        if (resourceUI != null)
+            resourceUI.GetComponent<Text> ().text = Resources.ToString();
     }
     public bool DecreaseResources(int resDec)
     {
         if (resDec > Resources)
             return false;
         Resources -= resDec;
-		resourceUI.GetComponent<Text> ().text = Resources.ToString();
+        if (resourceUI != null)
+            resourceUI.GetComponent<Text>().text = Resources.ToString();
         return true;
     }
 }
