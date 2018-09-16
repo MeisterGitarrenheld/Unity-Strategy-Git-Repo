@@ -33,6 +33,11 @@ public class AxeUnit : Unit, HitInterface {
                 agent.isStopped = false;
                 agent.SetDestination(target.getTargetPosition());
             }
+            else if(target.WType == WType.Collect)
+            {
+                agent.isStopped = false;
+                agent.SetDestination(target.getTargetPosition());
+            }
             else
             {
                 target = null;
