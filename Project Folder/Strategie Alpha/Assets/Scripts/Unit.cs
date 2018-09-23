@@ -69,7 +69,7 @@ public abstract class Unit : MonoBehaviour,Interactable {
                 if(agent.isOnNavMesh)
                     agent.isStopped = false;
                 if (Vector3.Distance(transform.position, target.getTargetPosition()) < 1.4f || 
-                    (Vector3.Distance(transform.position, target.getTargetPosition()) < 1.4f &&
+                    (Vector3.Distance(transform.position, target.getTargetPosition()) < 14f &&
                     agent.velocity.magnitude < 3f))
                 {
                     target = null;
