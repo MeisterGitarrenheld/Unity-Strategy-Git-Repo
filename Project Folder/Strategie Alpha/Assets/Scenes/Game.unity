@@ -773,7 +773,7 @@ Prefab:
     - target: {fileID: 224972068657638614, guid: fd7d3e2265fed4048ae0ec627e1869d4,
         type: 2}
       propertyPath: m_AnchorMin.x
-      value: 0.00000003413313
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114796035314416800, guid: fd7d3e2265fed4048ae0ec627e1869d4,
         type: 2}
@@ -813,12 +813,12 @@ Prefab:
     - target: {fileID: 224561833424637372, guid: fd7d3e2265fed4048ae0ec627e1869d4,
         type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 224980399206530474, guid: fd7d3e2265fed4048ae0ec627e1869d4,
         type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 224760088561877926, guid: fd7d3e2265fed4048ae0ec627e1869d4,
         type: 2}
@@ -1580,10 +1580,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ResourceFields:
-  - {fileID: 1380889847040024, guid: 9e7530038b414b54f87caf8b14cee5d7, type: 2}
-  - {fileID: 1555919441578212, guid: d03215a6ae7d77c4292a82d1187e4ccf, type: 2}
+  - {fileID: 1623955077538420, guid: c77cc2e2a1e62074fa9beedda792b596, type: 2}
+  - {fileID: 1086907286791046, guid: 1c20482bfc73a7d469e8e08646bc6514, type: 2}
+  - {fileID: 1346841624437164, guid: abafa94278611cb46bc00de4be498f83, type: 2}
   ResourcePositions: {fileID: 684387803}
-  ResourceRespawnTimer: 120
+  ResourceRespawnTimer: 5
 --- !u!1 &2115006449
 GameObject:
   m_ObjectHideFlags: 0
