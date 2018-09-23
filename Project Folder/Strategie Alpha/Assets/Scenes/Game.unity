@@ -1412,7 +1412,7 @@ MonoBehaviour:
   - {fileID: 1380889847040024, guid: 9e7530038b414b54f87caf8b14cee5d7, type: 2}
   - {fileID: 1555919441578212, guid: d03215a6ae7d77c4292a82d1187e4ccf, type: 2}
   ResourcePositions: {fileID: 684387803}
-  ResourceRespawnTimer: 300
+  ResourceRespawnTimer: 120
 --- !u!1 &2115006449
 GameObject:
   m_ObjectHideFlags: 0

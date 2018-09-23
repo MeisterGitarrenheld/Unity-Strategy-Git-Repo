@@ -132,12 +132,12 @@ public class SimpleKI : MonoBehaviour {
             }
         }
 
-        if (otherMain != null && attackUnits.Count > 0)
+        if (otherUnits.Count > 0 && attackUnits.Count > 0)
         {
             attackUnits.ForEach(v =>
             {
                 if (v.target == null)
-                    v.setTarget(new WalkType(otherMain.transform));
+                    v.setTarget(new WalkType(otherUnits[Random.Range(0, otherUnits.Count)].transform));
             });
         }
         if (otherfact != null && attackUnits.Count > 0)
@@ -148,12 +148,12 @@ public class SimpleKI : MonoBehaviour {
                     v.setTarget(new WalkType(otherfact.transform));
             });
         }
-        if (otherUnits.Count > 0 && attackUnits.Count > 0)
+        if (otherMain != null && attackUnits.Count > 0)
         {
             attackUnits.ForEach(v =>
             {
                 if (v.target == null)
-                    v.setTarget(new WalkType(otherUnits[Random.Range(0, otherUnits.Count)].transform));
+                    v.setTarget(new WalkType(otherMain.transform));
             });
         }
 
