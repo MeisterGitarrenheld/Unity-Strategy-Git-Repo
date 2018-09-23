@@ -114,15 +114,21 @@ public class SimpleKI : MonoBehaviour {
         {
             if (cu.target == null)
             {
-                GameObject res = GameObject.Find("ResourceField Comp");
-                if (res == null || res.transform.childCount <= 0)
+                Transform selectedResource = null;
+                float minDist = float.MaxValue;
+                foreach (var r in gm.Resources)
                 {
-                    var reses = GameObject.FindGameObjectsWithTag("Resource");
-                    if(reses.Length > 0)
-                        res = reses[Random.Range(0, reses.Length)].transform.parent.gameObject;
+                    float tempdist = 0;
+                    if ((tempdist = Vector3.Distance(r.position, cu.transform.position)) < minDist)
+                    {
+                        minDist = tempdist;
+                        selectedResource = r;
+                    }
                 }
-                if (res != null && res.transform.childCount > 0)
-                    cu.setTarget(new WalkType(res.transform.GetChild(Random.Range(0, res.transform.childCount)).position, WType.Collect));
+                if (selectedResource != null)
+                {
+                    cu.setTarget(new WalkType(selectedResource.position, WType.Collect));
+                }
             }
         }
 

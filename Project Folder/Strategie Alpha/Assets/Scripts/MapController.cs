@@ -22,7 +22,6 @@ public class MapController : MonoBehaviour {
         {
             resPositions[i] = ResourcePositions.GetChild(i);
         }
-        print(ResourcePositions.childCount);
 	}
 	
 	// Update is called once per frame
