@@ -29,8 +29,8 @@ public class BowUnit : Unit, HitInterface
                     attack();
                 }
             }
-            else if (target.WType == WType.Walk && Vector3.Distance(transform.position, target.getTargetPosition()) > 1)
-            {
+            else if (target.WType == WType.Walk && Vector3.Distance(transform.position, target.getTargetPosition()) > 2)
+			{
                 agent.isStopped = false;
                 if (agent.isOnNavMesh)
                     agent.SetDestination(target.getTargetPosition());
@@ -47,6 +47,9 @@ public class BowUnit : Unit, HitInterface
                 agent.isStopped = true;
             }
         }
+		if (target == null) {
+			SearchInRangeTargets ();
+		}
     }
 
     override
@@ -70,4 +73,31 @@ public class BowUnit : Unit, HitInterface
     {
         Health -= damage;
     }
+	private void SearchInRangeTargets(){
+		Collider[] colliders = Physics.OverlapSphere (transform.position, AttackRange);
+		Transform attackTarget = null;
+		float minDistance = float.MaxValue;
+		foreach (Collider col in colliders) {
+			if (col.gameObject.GetComponent<Unit> () == null) {
+				continue;
+			}
+			Unit foundUnit = col.gameObject.GetComponent<Unit> ();
+
+			if (foundUnit.getOwner () == owner) {
+				continue;
+			}
+			float distance = Vector3.Distance (transform.position, foundUnit.transform.position);
+			if (distance < minDistance) {
+				attackTarget = foundUnit.transform;
+				minDistance = distance; 
+			}
+
+		}
+		if (attackTarget == null) {
+			return;
+		}
+		Debug.Log ("Attack: " + attackTarget.name);
+		Debug.Log ("-Distance: " + minDistance);
+		target = new WalkType (attackTarget);
+	}
 }
