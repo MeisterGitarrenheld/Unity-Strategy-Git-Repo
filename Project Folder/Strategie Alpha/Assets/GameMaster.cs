@@ -96,7 +96,6 @@ public class GameMaster : MonoBehaviour {
         Resources = new List<Transform>();
         foreach (var r in GameObject.FindGameObjectsWithTag("Resource"))
             Resources.Add(r.transform);
-        mController.UpdateResources();
     }
 
 }

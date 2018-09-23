@@ -40,15 +40,4 @@ public class MapController : MonoBehaviour {
                 Instantiate(ResourceFields[Random.Range(0, ResourceFields.Length)], resPositions[freeResourcePositions[Random.Range(0, freeResourcePositions.Count)]]);
         }
 	}
-
-    public void UpdateResources()
-    {
-        /*
-        resPositions = new Transform[ResourcePositions.childCount];
-        for (int i = 0; i < resPositions.Length; i++)
-        {
-            resPositions[i] = ResourcePositions.GetChild(i);
-        }
-        */
-    }
 }
