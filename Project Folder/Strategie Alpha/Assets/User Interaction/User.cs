@@ -26,13 +26,15 @@ public class User : MonoBehaviour {
 
     public bool Defeated;
 
-	void Start ()
+	void Awake ()
     {
         gm = GameMaster.Instance;
         PlayerNum = gm.RegisterPlayer(this);
+    }
+    private void Start()
+    {
         Init();
     }
-
     protected virtual void Init() { }
 
 

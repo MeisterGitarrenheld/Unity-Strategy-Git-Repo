@@ -17,10 +17,10 @@ public class UnitUi : MonoBehaviour {
         unitDisplay.text = ownUnit.name;
         wayPoint = transform.GetChild(1);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-        if(ownUnit.target != null)
-            wayPoint.position = ownUnit.agent.destination;
-	}
+
+    // Update is called once per frame
+    void Update()
+    {
+        wayPoint.position = ownUnit.agent.destination;
+    }
 }

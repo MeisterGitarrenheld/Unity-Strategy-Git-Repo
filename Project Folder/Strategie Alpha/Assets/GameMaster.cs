@@ -20,7 +20,7 @@ public class GameMaster : MonoBehaviour {
     public Dictionary<byte, List<Transform>> PlayerInteractable { get; private set; }
     public List<Transform> Resources;
 
-	void Start ()
+	void Awake()
     {
         Instance = this;
         Application.targetFrameRate = 60;
