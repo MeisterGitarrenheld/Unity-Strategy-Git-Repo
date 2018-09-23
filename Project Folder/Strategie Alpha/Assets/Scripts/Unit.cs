@@ -51,7 +51,7 @@ public abstract class Unit : MonoBehaviour,Interactable {
         gm = GameMaster.Instance;
         unitUi = transform.GetComponentInChildren<UnitUi>();
         unitUi.gameObject.SetActive(false);
-        transform.GetChild(0).GetChild(3).localScale = Vector3.one * AttackRange;
+        transform.GetChild(0).GetChild(3).localScale = Vector3.one * AttackRange * 2;
     }
 
     // Update is called once per frame
