@@ -18,6 +18,7 @@ public class GameMaster : MonoBehaviour {
     
     public List<User> Players { get; private set; }
     public Dictionary<byte, List<Transform>> PlayerInteractable { get; private set; }
+    public List<Transform> Resources;
 
 	void Start ()
     {
@@ -26,6 +27,9 @@ public class GameMaster : MonoBehaviour {
         MainCamera = Camera.main;
         PlayerInteractable = new Dictionary<byte, List<Transform>>();
         Players = new List<User>();
+        Resources = new List<Transform>();
+        foreach (var r in GameObject.FindGameObjectsWithTag("Resource"))
+            Resources.Add(r.transform);
     }
 	
     public void RegisterInteractable(Transform newObject, byte player)
@@ -42,6 +46,15 @@ public class GameMaster : MonoBehaviour {
         PlayerInteractable.TryGetValue(player, out worker);
         worker.Remove(remObject);
         PlayerInteractable[player] = worker;
+
+        if (worker.Count == 0)
+            Players[player].Defeated = true;
+
+        int defeatedCount = 0;
+        Players.ForEach(v => { if (v.Defeated) defeatedCount++; });
+        if (defeatedCount >= Players.Count - 1)
+            print("Game Over");
+
     }
 
     public byte RegisterPlayer(User newUser)
@@ -67,6 +80,13 @@ public class GameMaster : MonoBehaviour {
         //If no free user, then destroy
         Destroy(ui.gameObject);
         return null;
+    }
+
+    public void UpdateResources()
+    {
+        Resources = new List<Transform>();
+        foreach (var r in GameObject.FindGameObjectsWithTag("Resource"))
+            Resources.Add(r.transform);
     }
 
 }

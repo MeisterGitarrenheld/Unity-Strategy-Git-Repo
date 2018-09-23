@@ -6,11 +6,23 @@ public class Resource : MonoBehaviour {
 
 	public int resourceCount;
 
-	public bool collectResources(int ammount){
+    private void Start()
+    {
+        GameMaster.Instance.UpdateResources();
+    }
+
+    public bool collectResources(int ammount){
 		resourceCount -= ammount;
 		if (resourceCount <= 0) {
-			Destroy (this.gameObject);
+			Destroy (gameObject);
+            if (transform.parent.childCount == 1)
+                Destroy(transform.parent.gameObject, 0.01f);
 		}
         return resourceCount <= 0;
 	}
+
+    private void OnDestroy()
+    {
+        GameMaster.Instance.UpdateResources();
+    }
 }

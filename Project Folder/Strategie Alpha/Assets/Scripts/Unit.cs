@@ -11,6 +11,7 @@ public abstract class Unit : MonoBehaviour,Interactable {
 		BOW_UNIT,
 		NONE
 	}
+    protected GameMaster gm;
     protected byte owner;
 	public float timer = 0;
 	public int carryMax;
@@ -31,8 +32,9 @@ public abstract class Unit : MonoBehaviour,Interactable {
 	private WalkType saveTarget;
 
     public string TargetType;
+    public float ResourceRange;
 
-	public void setOwner(byte owner){
+    public void setOwner(byte owner){
 		this.owner = owner;
 	}
 	public byte getOwner(){
@@ -46,6 +48,7 @@ public abstract class Unit : MonoBehaviour,Interactable {
 
 	// Use this for initialization
 	void Start () {
+        gm = GameMaster.Instance;
         unitUi = transform.GetComponentInChildren<UnitUi>();
         unitUi.gameObject.SetActive(false);
     }
@@ -63,9 +66,27 @@ public abstract class Unit : MonoBehaviour,Interactable {
         {
             if (collided == null)
             {
-                agent.isStopped = false;
-                if (Vector3.Distance(transform.position, target.getTargetPosition()) < 1.5f)
+                if(agent.isOnNavMesh)
+                    agent.isStopped = false;
+                if (Vector3.Distance(transform.position, target.getTargetPosition()) < 1.4f)
+                {
                     target = null;
+                    Transform selectedResource = null;
+                    float minDist = ResourceRange;
+                    foreach (var r in gm.Resources)
+                    {
+                        float tempdist = 0;
+                        if ((tempdist = Vector3.Distance(r.position, transform.position)) < minDist)
+                        {
+                            minDist = tempdist;
+                            selectedResource = r;
+                        }
+                    }
+                    if (selectedResource != null)
+                    {
+                        target = new WalkType(selectedResource.position, WType.Collect);
+                    }
+                }
             }
         }
         TargetType = target == null ? "" : target.WType.ToString();
@@ -91,7 +112,7 @@ public abstract class Unit : MonoBehaviour,Interactable {
 			//Sammel Resourcen ein!
 			collided = collider.gameObject;
 			collectRessources (collided);
-			agent.SetDestination(transform.position);
+			//agent.SetDestination(transform.position);
 		}
         else if (target != null && target.WType == WType.ReturnResources && carry > 0 && collider.tag.Equals("MainBuilding") && collider.GetComponent<MainBuilding>().getOwner() == owner)
         {
@@ -99,10 +120,22 @@ public abstract class Unit : MonoBehaviour,Interactable {
             User user = GameMaster.Instance.Players[owner];
             user.IncreaseResources(carry);
             carry = 0;
-            target = saveTarget;
+            if (saveTarget != null)
+                target = saveTarget;
         }
 
     }
+
+    void OnTriggerExit(Collider collider)
+    {
+        if (collided != null && target != null && target.WType == WType.Collect)
+        {
+            //Sammel Resourcen ein!
+            //agent.SetDestination(collided.transform.position);
+            agent.isStopped = false;
+        }
+    }
+    
     #region Interactable implementation
     public virtual void Activate (UserInteraction interactor)
 	{
@@ -118,45 +151,72 @@ public abstract class Unit : MonoBehaviour,Interactable {
 
     public abstract void updateUnit();
 
-	public void collectRessources(GameObject collided){
-        if(target != null && target.WType == WType.Collect)
+    public void collectRessources(GameObject collided)
+    {
+        if (target != null && target.WType == WType.Collect)
             agent.isStopped = true;
-		if (timer <= 0) {
-			timer = 1;
-			if (carry < carryMax) {
-                bool empty = false;
-				carry += 20;
-                empty = collided.GetComponent<Resource>().collectResources(20 < carry - carryMax ? carry - carryMax : 20);
-				if (carry > carryMax || empty) {
-					carry = carryMax;
-					collided = null;
-					GameMaster gm = GameMaster.Instance;
-					List<Transform> interact = new List<Transform> ();
-					gm.PlayerInteractable.TryGetValue (owner,out interact);
-					Transform closest = null;
-					float minDist = float.MaxValue;
-					foreach (Transform t in interact) {
-						if (t.tag.Equals ("MainBuilding")) {
-							float dist = Vector3.Distance (t.position, transform.position);
-							if (closest == null) {
-								closest = t;
-								minDist = dist;
-								continue;
-							}
-							if (minDist > dist) {
-								closest = t;
-								minDist = dist;
-							}
-						}
-					}
-                    saveTarget = empty ? new WalkType(transform.position) : target;
-					target = new WalkType (closest.position, WType.ReturnResources);
-					agent.isStopped = false;
+        if (timer <= 0)
+        {
+            timer = 1;
+            bool empty = false;
+            carry += 20;
+            empty = collided.GetComponent<Resource>().collectResources(20 < carry - carryMax ? carry - carryMax : 20);
+            if (carry >= carryMax)
+            {
+                carry = carryMax;
+                GameMaster gm = GameMaster.Instance;
+                List<Transform> interact = new List<Transform>();
+                gm.PlayerInteractable.TryGetValue(owner, out interact);
+                Transform closest = null;
+                float minDist = float.MaxValue;
+                foreach (Transform t in interact)
+                {
+                    if (t.tag.Equals("MainBuilding"))
+                    {
+                        float dist = Vector3.Distance(t.position, transform.position);
+                        if (closest == null)
+                        {
+                            closest = t;
+                            minDist = dist;
+                            continue;
+                        }
+                        if (minDist > dist)
+                        {
+                            closest = t;
+                            minDist = dist;
+                        }
+                    }
+                }
+                saveTarget = empty ? new WalkType(transform.position) : target;
+                if (closest != null)
+                    target = new WalkType(closest.position, WType.ReturnResources);
+                agent.isStopped = false;
 
-				}
-			}
-		}
-		timer -= Time.deltaTime;
-	}
+            }
+
+            if (empty)
+            {
+                Transform selectedResource = null;
+                float minDist = ResourceRange;
+                foreach (var r in gm.Resources)
+                {
+                    float tempdist = 0;
+                    if ((tempdist = Vector3.Distance(r.position, transform.position)) < minDist && r != collided.transform)
+                    {
+                        minDist = tempdist;
+                        selectedResource = r;
+                    }
+                }
+                if (selectedResource != null)
+                {
+                    if (carry < carryMax)
+                        target = new WalkType(selectedResource.position, WType.Collect);
+                    saveTarget = new WalkType(selectedResource.position, WType.Collect);
+                }
+            }
+
+        }
+        timer -= Time.deltaTime;
+    }
 
 }

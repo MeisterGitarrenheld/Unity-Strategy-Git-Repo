@@ -24,6 +24,8 @@ public class User : MonoBehaviour {
 	public int Resources { get; protected set; }
 	public GameObject resourceUI;
 
+    public bool Defeated;
+
 	void Start ()
     {
         gm = GameMaster.Instance;

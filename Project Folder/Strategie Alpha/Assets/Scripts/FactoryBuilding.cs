@@ -12,7 +12,12 @@ public class FactoryBuilding : Building, HitInterface
 	private Unit.UnitType currentJob = Unit.UnitType.NONE;
 	public float[] buildTimes;
 
-	public void discardUnit(Unit.UnitType type){
+    public List<Unit.UnitType> getBO()
+    {
+        return new List<Unit.UnitType>(buildOrder);
+    }
+
+    public void discardUnit(Unit.UnitType type){
 		for (int i = buildOrder.Count - 1; i >= 0; i--) {
 			if (buildOrder [i].Equals (type)) {
 				buildOrder.RemoveAt (i);
