@@ -17,7 +17,12 @@ public class MapController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         gm = GameMaster.Instance;
-        resPositions = ResourcePositions.GetComponentsInChildren<Transform>();
+        resPositions = new Transform[ResourcePositions.childCount];
+        for(int i = 0; i < resPositions.Length; i++)
+        {
+            resPositions[i] = ResourcePositions.GetChild(i);
+        }
+        print(ResourcePositions.childCount);
 	}
 	
 	// Update is called once per frame
