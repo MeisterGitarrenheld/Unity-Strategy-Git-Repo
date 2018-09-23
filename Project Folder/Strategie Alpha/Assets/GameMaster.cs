@@ -30,8 +30,15 @@ public class GameMaster : MonoBehaviour {
         Resources = new List<Transform>();
         foreach (var r in GameObject.FindGameObjectsWithTag("Resource"))
             Resources.Add(r.transform);
+        
     }
-	
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
+    }
+
     public void RegisterInteractable(Transform newObject, byte player)
     {
         List<Transform> worker;
