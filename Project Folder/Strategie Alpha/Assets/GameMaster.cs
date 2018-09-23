@@ -20,6 +20,8 @@ public class GameMaster : MonoBehaviour {
     public Dictionary<byte, List<Transform>> PlayerInteractable { get; private set; }
     public List<Transform> Resources;
 
+    MapController mController;
+
 	void Awake()
     {
         Instance = this;
@@ -30,7 +32,7 @@ public class GameMaster : MonoBehaviour {
         Resources = new List<Transform>();
         foreach (var r in GameObject.FindGameObjectsWithTag("Resource"))
             Resources.Add(r.transform);
-        
+        mController = GetComponent<MapController>();
     }
 
     private void Update()
@@ -94,6 +96,7 @@ public class GameMaster : MonoBehaviour {
         Resources = new List<Transform>();
         foreach (var r in GameObject.FindGameObjectsWithTag("Resource"))
             Resources.Add(r.transform);
+        mController.UpdateResources();
     }
 
 }
