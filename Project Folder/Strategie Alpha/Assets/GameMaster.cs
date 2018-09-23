@@ -22,6 +22,7 @@ public class GameMaster : MonoBehaviour {
 	void Start ()
     {
         Instance = this;
+        Application.targetFrameRate = 60;
         MainCamera = Camera.main;
         PlayerInteractable = new Dictionary<byte, List<Transform>>();
         Players = new List<User>();

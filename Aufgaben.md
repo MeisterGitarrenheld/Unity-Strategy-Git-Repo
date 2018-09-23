@@ -1,40 +1,40 @@
 ### Aufgaben _(offen)_
-* Fehler beheben: Einheiten kann sich nicht mehr bewegen beim resourcen sammeln
 * Networking
 * Bauzeit von Gebäuden
-* Siegbedingung
-* Terrein Texturen (bissel gestalten)
-* Startresourcen
-* Abzug von Resourcen beim bauen
-* AutoAttack Radius
-* Simple KI
-* (Blender Tutorial)
 
 ### Aufgaben Tom
-* **NavMesh anschauen** (Status: Work in Progress)
-
-  NavMesh anschauen, wie es funktioniert. Wie können Einheiten sich dadurch bewegen, was ist für das Movement dann wichtig? Wie bindet man das Terrein mit ein?
-  _DeadLine:_ 19.08.2018
-* **Terrein anlegen**
 * **MultiplayerScript anschauen**
-* **UserInteraction** (mit ID?) mit Input über Raycast?
-* **UserInterface** aktive Figur, Baumenü, Ressourcen,...
+* Simple KI
+* Siegbedingung
 
 ### Aufgaben Marco
-* **NavMesh anschauen** (Status: Work in Progress)
-
-  NavMesh anschauen, wie es funktioniert. Wie können Einheiten sich dadurch bewegen, was ist für das Movement dann wichtig? Wie bindet man das Terrein mit ein?
-  _DeadLine:_ 19.08.2018
 * **MultiplayerScript anschauen**
+* (Blender Tutorial)
+* Terrain Texturen (bissel gestalten)
+* AutoAttack Radius
+
+### Zu Testen
+* Fehler beheben: Einheiten kann sich nicht mehr bewegen beim resourcen sammeln
+
+
+### Erledigt!
 * **generische Building Script**(init, gameUpdate und onDestroy)
 * **generische Unit Typ** (init und gameUpdate onDestroy (drops?))
   * Attribute
   * Wie angreifen? (mit Radius, Raycast für Sicht abfrage)
+* **NavMesh anschauen** (Status: Work in Progress)
 
-### Zu Testen
+  NavMesh anschauen, wie es funktioniert. Wie können Einheiten sich dadurch bewegen, was ist für das Movement dann wichtig? Wie bindet man das Terrein mit ein?
+  _DeadLine:_ 19.08.2018
+* **UserInteraction** (mit ID?) mit Input über Raycast?
+* **UserInterface** aktive Figur, Baumenü, Ressourcen,...
+* **NavMesh anschauen** (Status: Work in Progress)
 
-
-### Erledigt!
+  NavMesh anschauen, wie es funktioniert. Wie können Einheiten sich dadurch bewegen, was ist für das Movement dann wichtig? Wie bindet man das Terrein mit ein?
+  _DeadLine:_ 19.08.2018
+* **Terrain anlegen**
+* Startresourcen
+* Abzug von Resourcen beim bauen
 
 
 Vorlage Aufgabe:
