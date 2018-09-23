@@ -459,6 +459,7 @@ MonoBehaviour:
   carryMax: 20
   cost: 150
   AttackRange: 10
+  AutoAttackRange: 10
   Damage: 20
   AttackSpeed: 3
   agent: {fileID: 195120408090013094}

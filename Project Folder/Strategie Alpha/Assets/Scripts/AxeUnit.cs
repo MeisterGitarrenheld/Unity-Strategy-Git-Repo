@@ -47,6 +47,9 @@ public class AxeUnit : Unit, HitInterface {
                 agent.isStopped = true;
             }
         }
+		if (target == null) {
+			SearchInRangeTargets ();
+		}
     }
 
     override

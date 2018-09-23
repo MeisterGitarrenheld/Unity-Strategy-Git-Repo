@@ -18,6 +18,7 @@ public abstract class Unit : MonoBehaviour,Interactable {
 	public int carry { get; protected set; }
 	public int cost;
     public float AttackRange;
+	public float AutoAttackRange;
     public int Damage;
 	public float AttackSpeed;
 	public NavMeshAgent agent;
@@ -51,7 +52,7 @@ public abstract class Unit : MonoBehaviour,Interactable {
         gm = GameMaster.Instance;
         unitUi = transform.GetComponentInChildren<UnitUi>();
         unitUi.gameObject.SetActive(false);
-        transform.GetChild(0).GetChild(3).localScale = Vector3.one * AttackRange * 2;
+        transform.GetChild(0).GetChild(3).localScale = Vector3.one * AutoAttackRange * 2;
     }
 
     // Update is called once per frame
@@ -221,5 +222,46 @@ public abstract class Unit : MonoBehaviour,Interactable {
         }
         timer -= Time.deltaTime;
     }
+	protected void SearchInRangeTargets(){
+		Collider[] colliders = Physics.OverlapSphere (transform.position,AutoAttackRange);
+		List<Collider> enemyBuildings = new List<Collider> ();
+		Transform attackTarget = null;
+		float minDistance = float.MaxValue;
 
+		foreach (Collider col in colliders) {
+			if (col.gameObject.GetComponent<Unit> () == null && col.gameObject.GetComponent<Building> () == null) {
+				continue;
+			}
+			Unit foundUnit = col.gameObject.GetComponent<Unit> ();
+			if (foundUnit == null) {
+				if (col.gameObject.GetComponent<Building> ().getOwner () != owner) {
+					enemyBuildings.Add (col);
+				}
+				continue;
+			}
+			if (foundUnit.getOwner () == owner) {
+				continue;
+			}
+			float distance = Vector3.Distance (transform.position, foundUnit.transform.position);
+			if (distance < minDistance) {
+				attackTarget = foundUnit.transform;
+				minDistance = distance; 
+			}
+
+		}
+		if (attackTarget == null) {
+			foreach (Collider col in enemyBuildings) {
+				Building build = col.gameObject.GetComponent<Building>();
+				float distance = Vector3.Distance (transform.position, build.transform.position);
+				if (distance < minDistance) {
+					attackTarget = build.transform;
+					minDistance = distance; 
+				}
+			}
+		}
+		if (attackTarget == null) {
+			return;
+		}
+		target = new WalkType (attackTarget);
+	}
 }
