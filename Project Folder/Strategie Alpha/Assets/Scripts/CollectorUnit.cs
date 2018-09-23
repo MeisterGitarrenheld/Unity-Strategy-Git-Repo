@@ -15,7 +15,8 @@ public class CollectorUnit : Unit, HitInterface
     {
         if (toBuild != null)
         {
-            GameMaster.Instance.UnRegisterInteractable(toBuild.transform, owner);
+            gm.UnRegisterInteractable(toBuild.transform, owner);
+            gm.Players[owner].IncreaseResources(toBuild.GetComponent<Building>().costs);
             Destroy(toBuild);
             toBuild = null;
         }

@@ -96,8 +96,8 @@ public class BowUnit : Unit, HitInterface
 		if (attackTarget == null) {
 			return;
 		}
-		Debug.Log ("Attack: " + attackTarget.name);
-		Debug.Log ("-Distance: " + minDistance);
+		//Debug.Log ("Attack: " + attackTarget.name);
+		//Debug.Log ("-Distance: " + minDistance);
 		target = new WalkType (attackTarget);
 	}
 }
