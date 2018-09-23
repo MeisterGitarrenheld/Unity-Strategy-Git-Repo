@@ -48,7 +48,7 @@ public class CollectorUnit : Unit, HitInterface
                 StopBuild();
             }
 
-            if (target != null && target.WType == WType.Walk && Vector3.Distance(transform.position, target.getTargetPosition()) < 1)
+            if (target != null && target.WType == WType.Walk && Vector3.Distance(transform.position, target.getTargetPosition()) < 1.4)
             {
                 if (agent.isOnNavMesh)
                     agent.SetDestination(transform.position);

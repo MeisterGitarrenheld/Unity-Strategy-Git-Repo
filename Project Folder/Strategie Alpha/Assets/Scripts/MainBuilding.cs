@@ -36,7 +36,8 @@ public class MainBuilding : Building, HitInterface
 
 			if ((int)currentJob != 3) {
 				GameObject obj = Instantiate (listOfUnits [(int)currentJob], this.transform.position, this.transform.rotation);
-				obj.GetComponent<Unit>().agent.SetDestination(target.getTargetPosition());
+                if(target != null)
+                    obj.GetComponent<Unit>().setTarget(target);
 				obj.GetComponent<Unit> ().setOwner (owner);
 				GameMaster.Instance.RegisterInteractable(obj.transform, owner);
 				currentJob = 0;

@@ -13,6 +13,8 @@ public abstract class Building : MonoBehaviour, Interactable
     public Sprite icon;
     private bool placed;
 
+    public string TargetType;
+
     public byte getOwner()
     {
         return owner;
@@ -26,7 +28,7 @@ public abstract class Building : MonoBehaviour, Interactable
     {
         buildingUi = GetComponentInChildren<BuildingUi>();
         buildingUi.gameObject.SetActive(false);
-		target = new WalkType (transform.position);
+		target = null;
     }
     // Update is called once per frame
     void Update()
@@ -38,6 +40,9 @@ public abstract class Building : MonoBehaviour, Interactable
         {
             Die();
         }
+
+        TargetType = target == null ? "" : target.WType.ToString();
+
     }
 
     protected virtual void Die()
