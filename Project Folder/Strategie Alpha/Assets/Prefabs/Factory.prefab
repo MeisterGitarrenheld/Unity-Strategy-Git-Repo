@@ -505,7 +505,9 @@ MonoBehaviour:
   Health: 200
   costs: 300
   icon: {fileID: 21300000, guid: 4539d77a47e18b34086e269c90388f92, type: 3}
-  factorySpeed: 1
+  TargetType: 
+  buildTime: 48
+  factorySpeed: 60
   listOfUnits:
   - {fileID: 1569068812183114, guid: c07699472f9ac024da786731eb9af42b, type: 2}
   - {fileID: 1012720102661232, guid: f2cec7e5fe4bde149ad734b773c28cc8, type: 2}

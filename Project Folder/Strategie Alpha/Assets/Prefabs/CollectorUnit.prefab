@@ -625,6 +625,7 @@ MonoBehaviour:
   carryMax: 50
   cost: 20
   AttackRange: 0
+  AutoAttackRange: 0
   Damage: 0
   AttackSpeed: 0
   agent: {fileID: 195559809183764202}
@@ -633,6 +634,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: b308376e15dd7d34a9397a13d165c86e, type: 3}
   TargetType: 
   ResourceRange: 50
+  buildingSpeed: 10
 --- !u!114 &114913646897872728
 MonoBehaviour:
   m_ObjectHideFlags: 1

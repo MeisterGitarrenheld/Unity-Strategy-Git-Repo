@@ -32,7 +32,7 @@ public class FactoryBuilding : Building, HitInterface
 		if (currentJob.Equals(Unit.UnitType.NONE) && buildOrder.Count == 0) {
 			return;
 		}
-		currentBuildingTime -= factorySpeed;
+		currentBuildingTime -= factorySpeed * Time.deltaTime;
 
 		if (currentBuildingTime <= 0) {
 			

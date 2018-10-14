@@ -5,6 +5,10 @@ using UnityEngine;
 public class CollectorUnit : Unit, HitInterface
 {
     public GameObject toBuild { get; private set; }
+    public float buildingSpeed;
+
+    private float currentBuildTime = 0f;
+    private bool startBuilding = false;
 
     public void SetBuildBuilding(GameObject building)
     {
@@ -19,30 +23,49 @@ public class CollectorUnit : Unit, HitInterface
             gm.Players[owner].IncreaseResources(toBuild.GetComponent<Building>().costs);
             Destroy(toBuild);
             toBuild = null;
+            startBuilding = false;
         }
     }
 
-	public void buildBuilding(){
-        if(toBuild != null)
+    public void buildBuilding()
+    {
+        print("Build!");
+        if (toBuild != null)
         {
+            print("Build! 111");
             toBuild.GetComponent<Building>().Place();
             toBuild = null;
-        }
-	}
+            startBuilding = false;
 
-	// Update is called once per frame
-	override
-	public void updateUnit() {
+        }
+    }
+
+    // Update is called once per frame
+    override
+    public void updateUnit()
+    {
         if (target != null)
         {
-            if(agent.isOnNavMesh)
+            if (agent.isOnNavMesh)
                 agent.SetDestination(target.getTargetPosition());
             if (target.WType == WType.Build && Vector3.Distance(transform.position, target.getTargetPosition()) < 5)
             {
-                buildBuilding();
-                target = null;
+                if (!startBuilding)
+                {
+                    currentBuildTime = toBuild.GetComponent<Building>().buildTime;
+                    startBuilding = true;
+                }
                 if (agent.isOnNavMesh)
                     agent.SetDestination(transform.position);
+                if (currentBuildTime <= 0)
+                {
+                    buildBuilding();
+                    target = null;
+                }
+                else
+                {
+                    currentBuildTime -= buildingSpeed * Time.deltaTime;
+                }
             }
             else if (target.WType != WType.Build && toBuild != null)
             {
@@ -58,26 +81,27 @@ public class CollectorUnit : Unit, HitInterface
         }
 
     }
-	override
-	public void attack(){
+    override
+    public void attack()
+    {
 
-	}
-	override
-	public void Activate (UserInteraction interactor)
-	{
-		base.Activate (interactor);
-		GameMaster gm = GameMaster.Instance;
-		User user = gm.Players [owner];
-		user.ui.showCollectorMenu ();
-	}
-	override
-	public void Deactivate(UserInteraction interactor)
-	{
-		base.Deactivate (interactor);
-		GameMaster gm = GameMaster.Instance;
-		User user = gm.Players [owner];
-		user.ui.showNoneMenu ();
-	}
+    }
+    override
+    public void Activate(UserInteraction interactor)
+    {
+        base.Activate(interactor);
+        GameMaster gm = GameMaster.Instance;
+        User user = gm.Players[owner];
+        user.ui.showCollectorMenu();
+    }
+    override
+    public void Deactivate(UserInteraction interactor)
+    {
+        base.Deactivate(interactor);
+        GameMaster gm = GameMaster.Instance;
+        User user = gm.Players[owner];
+        user.ui.showNoneMenu();
+    }
 
     public void Hit(int damage)
     {

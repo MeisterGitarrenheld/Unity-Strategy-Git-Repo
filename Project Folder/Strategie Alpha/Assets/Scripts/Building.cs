@@ -14,6 +14,7 @@ public abstract class Building : MonoBehaviour, Interactable
     private bool placed;
 
     public string TargetType;
+    public int buildTime;
 
     public byte getOwner()
     {
