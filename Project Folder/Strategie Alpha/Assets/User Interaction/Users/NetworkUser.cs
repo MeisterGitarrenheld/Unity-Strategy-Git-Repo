@@ -5,33 +5,14 @@ using UnityEngine.Networking;
 
 public class NetworkUser : User
 {
-
-
     public GameObject[] InitSpawn;
     private bool spawn;
 
     protected override void Init()
     {
-        if (true)
-        {
-            enabled = false;
-            return;
-        }
-
-        UType = UserType.Network;
+        UType = UserType.Local;
         uInteraction = GetComponent<UserInteraction>();
-        foreach (Unit un in FindObjectsOfType<Unit>())
-        {
-            gm.RegisterInteractable(un.transform, PlayerNum);
-            un.setOwner(PlayerNum);
-        }
-
-        foreach (Building un in FindObjectsOfType<Building>())
-        {
-            gm.RegisterInteractable(un.transform, PlayerNum);
-            un.setOwner(PlayerNum);
-            un.Place();
-        }
+        IncreaseResources(100);
         spawn = true;
     }
 

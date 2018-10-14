@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameMaster : MonoBehaviour {
 
@@ -22,6 +23,9 @@ public class GameMaster : MonoBehaviour {
 
     MapController mController;
 
+    private bool gameOver;
+    private float gameOverTimer = 10f;
+
 	void Awake()
     {
         Instance = this;
@@ -38,7 +42,14 @@ public class GameMaster : MonoBehaviour {
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
-            Application.Quit();
+            SceneManager.LoadScene(0);
+
+        if (gameOver)
+        {
+            gameOverTimer -= Time.deltaTime;
+            if (gameOverTimer <= 0)
+                SceneManager.LoadScene(0);
+        }
     }
 
     public void RegisterInteractable(Transform newObject, byte player)
@@ -62,7 +73,10 @@ public class GameMaster : MonoBehaviour {
         int defeatedCount = 0;
         Players.ForEach(v => { if (v.Defeated) defeatedCount++; });
         if (defeatedCount >= Players.Count - 1)
+        {
+            gameOver = true;
             print("Game Over");
+        }
 
     }
 
