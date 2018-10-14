@@ -1,21 +1,19 @@
 ### Aufgaben _(offen)_
-* Networking
-* Bauzeit von Gebäuden
+* Neue Einheiten
+* Neue Gebäude
+* Projektile
+* Einheiten Aufwerten
 
 ### Aufgaben Tom
-* **MultiplayerScript anschauen**
-* Simple KI
-* Siegbedingung
+* Networking
 
 ### Aufgaben Marco
-* **MultiplayerScript anschauen**
+* Map umkrempeln -> NavMesh Tutorial Brackeys Stil
 * (Blender Tutorial)
-* Terrain Texturen (bissel gestalten)
-* AutoAttack Radius
+* Abwehrtürme
+
 
 ### Zu Testen
-* Fehler beheben: Einheiten kann sich nicht mehr bewegen beim resourcen sammeln
-
 
 ### Erledigt!
 * **generische Building Script**(init, gameUpdate und onDestroy)
@@ -35,6 +33,12 @@
 * **Terrain anlegen**
 * Startresourcen
 * Abzug von Resourcen beim bauen
+* Bauzeit von Gebäuden
+* AutoAttack Radius
+* Simple KI
+* Siegbedingung
+* Fehler beheben: Einheiten kann sich nicht mehr bewegen beim resourcen sammeln
+
 
 
 Vorlage Aufgabe:
